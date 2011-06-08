@@ -1,12 +1,15 @@
 ﻿package 
 {
+	import de.crowdpark.mvcs.ApplicationContext;
 	import flash.display.Sprite;
 
 	public class Main extends Sprite
 	{
 		public function Main()
 		{
-			// Launch your application by right clicking within this class and select: Deubg As > FDT SWF Application
+			var applicationContext : ApplicationContext = new ApplicationContext();
+			applicationContext.root = this;
+			applicationContext.init();
 		}
 	}
 }
