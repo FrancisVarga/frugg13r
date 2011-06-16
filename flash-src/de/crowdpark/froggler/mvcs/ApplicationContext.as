@@ -43,8 +43,6 @@ package de.crowdpark.froggler.mvcs
 				throw new Error("root is null");
 			}
 			
-			this.root.gotoAndPlay("titleIn");
-			
 			this.invokeBootStrap();
 		}
 

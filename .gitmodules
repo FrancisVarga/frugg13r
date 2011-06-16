@@ -1,0 +1,3 @@
+[submodule "libs/as3Utils"]
+	path = libs/as3Utils
+	url = git://github.com/as3/as3-utils.git

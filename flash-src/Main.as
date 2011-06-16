@@ -2,13 +2,14 @@
 {
 	import de.crowdpark.froggler.mvcs.ApplicationContext;
 
+	import flash.display.MovieClip;
 	import flash.display.StageAlign;
 	import flash.display.StageScaleMode;
 	import flash.events.Event;
 	import flash.events.IEventDispatcher;
 
 	[SWF(backgroundColor="#FFFFFF", frameRate="30", width="768", height="768")]
-	public class Main extends FrogglerMain
+	public class Main extends MovieClip
 	{
 		public function Main()
 		{

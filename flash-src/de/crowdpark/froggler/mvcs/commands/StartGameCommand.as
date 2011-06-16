@@ -8,7 +8,7 @@ package de.crowdpark.froggler.mvcs.commands
 	{
 		override public function executeCommand(data : Object = null) : void
 		{
-			this.context.root.gotoAndPlay("titleOut");	
+			this.context.root.gotoAndPlay("gameIn");	
 		}
 
 	}
