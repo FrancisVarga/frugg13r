@@ -12,22 +12,23 @@ package de.crowdpark.froggler.mvcs.core
 		{
 			this.stop();
 
-			addEventListener(MouseEvent.CLICK, onClick);
-			addEventListener(MouseEvent.MOUSE_OVER, onMouseOver);
-			addEventListener(MouseEvent.MOUSE_OUT, onMouseOut);
+			addEventListener(MouseEvent.CLICK, clickState);
+			addEventListener(MouseEvent.MOUSE_UP, idleState);
+			addEventListener(MouseEvent.MOUSE_OVER, overState);
+			addEventListener(MouseEvent.MOUSE_OUT, idleState);
 		}
 
-		protected function onMouseOut(event : MouseEvent) : void
+		protected function idleState(event : MouseEvent) : void
 		{
 			this.gotoAndStop("idle");
 		}
 
-		protected function onMouseOver(event : MouseEvent) : void
+		protected function overState(event : MouseEvent) : void
 		{
 			this.gotoAndStop("on");
 		}
 
-		protected function onClick(event : MouseEvent) : void
+		protected function clickState(event : MouseEvent) : void
 		{
 			this.gotoAndStop("click");
 		}
