@@ -1,9 +1,8 @@
 package de.crowdpark.froggler.mvcs
 {
-	import de.crowdpark.froggler.mvcs.services.SharedObjectService;
-	import de.crowdpark.froggler.utils.dump;
 	import de.crowdpark.froggler.mvcs.models.GameModel;
 	import de.crowdpark.froggler.mvcs.models.ScoreModel;
+	import de.crowdpark.froggler.mvcs.services.SharedObjectService;
 	import de.crowdpark.froggler.mvcs.views.main.MainView;
 
 	/**
@@ -39,8 +38,6 @@ package de.crowdpark.froggler.mvcs
 		public function init() : void
 		{
 			
-			dump("Init Application");
-			
 			if (!root)
 			{
 				throw new Error("root is null");
@@ -53,8 +50,6 @@ package de.crowdpark.froggler.mvcs
 
 		private function invokeBootStrap() : void
 		{
-			
-			dump("Bootstrapping");
 			
 			this._gameModel = new GameModel();
 			this._scoreModel = new ScoreModel();

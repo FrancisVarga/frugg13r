@@ -3,7 +3,6 @@ package de.crowdpark.froggler.mvcs.services
 	import de.crowdpark.froggler.mvcs.core.AbstractService;
 	import de.crowdpark.froggler.mvcs.models.vo.HighScoreVO;
 
-	import flash.events.IEventDispatcher;
 	import flash.net.SharedObject;
 
 	/**

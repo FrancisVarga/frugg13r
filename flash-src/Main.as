@@ -19,7 +19,7 @@
 		}
 
 		private function onRootAddedToStage(event : Event) : void
-		{
+		{			
 			IEventDispatcher(event.currentTarget).removeEventListener(event.type, arguments['callee']);
 			
 			var context : ApplicationContext = ApplicationContext.Instance;
