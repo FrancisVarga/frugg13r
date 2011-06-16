@@ -4,7 +4,6 @@ package de.crowdpark.froggler.mvcs
 	import de.crowdpark.froggler.mvcs.models.GameModel;
 	import de.crowdpark.froggler.mvcs.models.ScoreModel;
 	import de.crowdpark.froggler.mvcs.services.SharedObjectService;
-	import de.crowdpark.froggler.mvcs.views.main.MainView;
 
 	/**
 	 * @author Francis Varga

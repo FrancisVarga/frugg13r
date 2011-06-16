@@ -6,7 +6,7 @@ package de.crowdpark.froggler.mvcs.core
 	/**
 	 * @author Francis Varga
 	 */
-	public class AbstractInteractiveComponent extends MovieClip
+	public class AbstractInteractiveComponent extends MovieClip implements IInteractiveComponent
 	{
 		public function AbstractInteractiveComponent()
 		{
@@ -31,6 +31,18 @@ package de.crowdpark.froggler.mvcs.core
 		protected function clickState(event : MouseEvent) : void
 		{
 			this.gotoAndStop("click");
+		}
+
+		public function show() : void
+		{
+		}
+
+		public function hide() : void
+		{
+		}
+
+		public function dispose() : void
+		{
 		}
 	}
 }
