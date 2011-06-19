@@ -1,6 +1,6 @@
 package de.crowdpark.froggler.mvcs
 {
-	import de.crowdpark.froggler.mvcs.commands.GameInvoker;
+	import de.crowdpark.froggler.mvcs.commands.GameInvokerCommand;
 	import de.crowdpark.froggler.mvcs.models.GameModel;
 	import de.crowdpark.froggler.mvcs.models.ScoreModel;
 	import de.crowdpark.froggler.mvcs.services.SharedObjectService;
@@ -53,7 +53,7 @@ package de.crowdpark.froggler.mvcs
 			this._scoreModel = new ScoreModel();
 			
 			SharedObjectService.Instance.init();
-			new GameInvoker();
+			new GameInvokerCommand();
 			
 		}
 

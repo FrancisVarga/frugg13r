@@ -8,7 +8,7 @@
 	import flash.events.Event;
 	import flash.events.IEventDispatcher;
 
-	[SWF(backgroundColor="#FFFFFF", frameRate="30", width="768", height="768")]
+	[SWF(backgroundColor="#FFFFFF", frameRate="36", width="768", height="768")]
 	public class Main extends MovieClip
 	{
 		public function Main()

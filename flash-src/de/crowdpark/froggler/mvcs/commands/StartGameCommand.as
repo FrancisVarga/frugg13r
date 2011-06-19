@@ -1,6 +1,8 @@
 package de.crowdpark.froggler.mvcs.commands
 {
+	import de.crowdpark.froggler.mvcs.views.board.BoardView;
 	import de.crowdpark.froggler.mvcs.core.AbstractCommand;
+
 	/**
 	 * @author Francis Varga
 	 */
@@ -8,8 +10,8 @@ package de.crowdpark.froggler.mvcs.commands
 	{
 		override public function executeCommand(data : Object = null) : void
 		{
-			this.context.root.gotoAndPlay("gameIn");	
+			BoardView.Instance;
+			this.context.root.gotoAndPlay("gameIn");
 		}
-
 	}
 }

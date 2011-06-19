@@ -5,11 +5,11 @@ package de.crowdpark.froggler.mvcs.commands
 	/**
 	 * @author Francis Varga
 	 */
-	public class FinishGame extends AbstractCommand
+	public class FinishGameCommand extends AbstractCommand
 	{
 		override public function executeCommand(data : Object = null) : void
 		{
-			
+			context.root.gotoAndPlay("gameOut");
 		}
 	}
 }

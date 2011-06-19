@@ -20,6 +20,11 @@ package de.crowdpark.froggler.mvcs.core
 		public function init(view : MovieClip) : void
 		{
 			this._view = view;
+			registerEvents();
+		}
+
+		protected function registerEvents() : void
+		{
 		}
 
 		public function dispose() : void

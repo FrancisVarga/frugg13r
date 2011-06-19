@@ -1,9 +1,8 @@
 package de.crowdpark.froggler.mvcs.views.scores
 {
-	import com.greensock.TweenMax;
-	import flash.display.MovieClip;
-
 	import de.crowdpark.froggler.mvcs.core.AbstractMediator;
+
+	import com.greensock.TweenMax;
 
 	import flash.events.IEventDispatcher;
 
@@ -17,10 +16,9 @@ package de.crowdpark.froggler.mvcs.views.scores
 			super(target);
 		}
 
-		override public function init(view : MovieClip) : void
+		
+		override protected function registerEvents() : void
 		{
-			super.init(view);
-
 			view.addEventListener(ScoresViewEvent.BACK, onBackClicked);
 		}
 

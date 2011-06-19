@@ -8,7 +8,7 @@ package de.crowdpark.froggler.mvcs.commands
 	/**
 	 * @author Francis Varga
 	 */
-	public class GameInvoker extends AbstractCommand
+	public class GameInvokerCommand extends AbstractCommand
 	{
 		override public function executeCommand(data : Object = null) : void
 		{			
