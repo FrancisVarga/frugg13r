@@ -32,15 +32,16 @@ package de.crowdpark.froggler.mvcs.controller
 
 		public function FroggerController()
 		{
-			this.x += this.x / 2;
-			this.y += this.y / 2;
 			this.addEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
 		}
 
 		private function onAddedToStage(event : Event) : void
 		{
 			IEventDispatcher(event.currentTarget).removeEventListener(event.type, arguments['callee']);
-
+			
+			this.x += this.x / 2;
+			this.y += this.y / 2;
+			
 			_froggerMC = (this.getChildByName("frog") as MovieClip);
 			_froggerMC.gotoAndPlay(_idleAnimationKeyName);
 
