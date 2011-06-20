@@ -31,9 +31,7 @@ package de.crowdpark.froggler.mvcs.views.board
 			WaterEnemysController.Instance.targetList = _boardView.waterArray;
 			StreetEnemyController.Instance.tartgetList = _boardView.streetArray;
 			FroggerController.Instance.boardMC = _boardView;
-			FroggerController.Instance.init();
 		}
-
 		
 	}
 }

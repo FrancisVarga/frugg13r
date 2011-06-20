@@ -23,7 +23,12 @@ package de.crowdpark.froggler.mvcs.core
 		protected function moveRight() : void
 		{
 		}
-
+		
+		protected function moveBack():void
+		{
+			
+		}
+		
 		protected function moveInALine() : void
 		{
 		}

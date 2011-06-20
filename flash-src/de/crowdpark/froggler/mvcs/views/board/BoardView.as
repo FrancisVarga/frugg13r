@@ -22,7 +22,6 @@ package de.crowdpark.froggler.mvcs.views.board
 
 		public function BoardView()
 		{
-			
 			_streetArray = new Array();
 			_waterArray = new Array();
 
