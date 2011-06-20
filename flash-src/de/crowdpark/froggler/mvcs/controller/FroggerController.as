@@ -148,11 +148,22 @@ package de.crowdpark.froggler.mvcs.controller
 
 		private function moveHorizontal(factor : String) : void
 		{
+			var newX : int = this.x + _froggerMC.width + parseInt(factor);
+			
+
+			if (newX > 810) return;
+			if (newX < 90) return;
+
 			TweenMax.to(this, 0.4, {x:factor});
 		}
 
 		private function moveVertical(factor : String) : void
 		{
+			var newY : int = this.y + _froggerMC.height + parseInt(factor);
+			
+			if(newY > 800) return;
+			if(newY < 90) return;
+			
 			TweenMax.to(this, 0.4, {y:factor});
 		}
 
