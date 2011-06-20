@@ -1,5 +1,7 @@
 package de.crowdpark.froggler.mvcs.core
 {
+	import com.greensock.TweenMax;
+
 	import flash.display.MovieClip;
 	import flash.events.Event;
 	import flash.events.IEventDispatcher;
@@ -13,6 +15,7 @@ package de.crowdpark.froggler.mvcs.core
 		protected var _targetMovementMC : MovieClip;
 		protected var _xEndpoint : int;
 		protected var _xStartPoint : int;
+		protected var _moveDuration : int;
 
 		public function AbstractBoardToken()
 		{
@@ -30,18 +33,45 @@ package de.crowdpark.froggler.mvcs.core
 
 			this.addEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
 			this.x = this._xStartPoint;
+			this.alpha = 0;
 
 			_targetMovementMC.addChild(this);
+		}
+
+		public function set automove(automove : Boolean) : void
+		{
+			_automove = automove;
+		}
+
+		public function set xStartPoint(xStartPoint : int) : void
+		{
+			_xStartPoint = xStartPoint;
+		}
+
+		public function set xEndpoint(xEndpoint : int) : void
+		{
+			_xEndpoint = xEndpoint;
+		}
+
+		public function set moveDuration(moveDuration : int) : void
+		{
+			_moveDuration = moveDuration;
+		}
+
+		override public function dispose() : void
+		{
+			_targetMovementMC.removeChild(this);
 		}
 
 		protected function onAddedToStage(event : Event) : void
 		{
 			IEventDispatcher(event.currentTarget).removeEventListener(event.type, arguments['callee']);
-			move();
+			TweenMax.to(this, 0.3, {autoAlpha:1, onComplete:move});
 		}
 
 		protected function move() : void
 		{
+			TweenMax.to(this, _moveDuration, {x:_xEndpoint, onComplete:onMoveComplete});
 		}
 
 		protected function onMoveComplete() : void
@@ -67,21 +97,6 @@ package de.crowdpark.froggler.mvcs.core
 
 		protected function moveInALine() : void
 		{
-		}
-
-		public function set automove(automove : Boolean) : void
-		{
-			_automove = automove;
-		}
-
-		public function set xStartPoint(xStartPoint : int) : void
-		{
-			_xStartPoint = xStartPoint;
-		}
-
-		public function set xEndpoint(xEndpoint : int) : void
-		{
-			_xEndpoint = xEndpoint;
 		}
 	}
 }
