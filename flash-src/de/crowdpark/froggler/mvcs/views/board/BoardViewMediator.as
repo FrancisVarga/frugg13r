@@ -29,7 +29,11 @@ package de.crowdpark.froggler.mvcs.views.board
 		{
 			trace("onStart");
 			WaterEnemysController.Instance.targetList = _boardView.waterArray;
+			WaterEnemysController.Instance.init();
+			
 			StreetEnemyController.Instance.tartgetList = _boardView.streetArray;
+			StreetEnemyController.Instance.init();
+			
 			FroggerController.Instance.boardMC = _boardView;
 		}
 		
