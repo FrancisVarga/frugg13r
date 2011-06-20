@@ -18,6 +18,8 @@ package de.crowdpark.froggler.mvcs.controller
 		private var _boardMC : MovieClip;
 		private var _moveHorizontalFactor : uint = 64;
 		private var _moveVerticalFactor : uint = 64;
+		private var _defaultX : int;
+		private var _defaultY : int;
 		private var _moveAnimationKeyName : String = "jump";
 		private var _deadAnimationKeyName : String = "dead";
 		private var _idleAnimationKeyName : String = "idle";
@@ -38,10 +40,13 @@ package de.crowdpark.froggler.mvcs.controller
 		private function onAddedToStage(event : Event) : void
 		{
 			IEventDispatcher(event.currentTarget).removeEventListener(event.type, arguments['callee']);
-			
-			this.x += this.x / 2;
-			this.y += this.y / 2;
-			
+
+			_defaultX = this.x += this.width / 2;
+			_moveHorizontalFactor += _defaultX;
+
+			_defaultY = this.y += this.height / 2;
+			_moveVerticalFactor += _defaultY;
+
 			_froggerMC = (this.getChildByName("frog") as MovieClip);
 			_froggerMC.gotoAndPlay(_idleAnimationKeyName);
 
@@ -51,6 +56,11 @@ package de.crowdpark.froggler.mvcs.controller
 		public function die() : void
 		{
 			_froggerMC.gotoAndPlay(_deadAnimationKeyName);
+		}
+
+		public function win() : void
+		{
+			_froggerMC.gotoAndPlay(_dissappearAnimationKeyName);
 		}
 
 		override protected function clickState(event : MouseEvent) : void
@@ -112,36 +122,38 @@ package de.crowdpark.froggler.mvcs.controller
 		{
 			TweenMax.to(this, 0.2, {shortRotation:{rotation:180}});
 			_froggerMC.gotoAndPlay(_moveAnimationKeyName);
-			// this.rotation = 180;
+			this.moveVertical(_moveVerticalFactor.toString());
 		}
 
 		override protected function moveForward() : void
 		{
 			TweenMax.to(this, 0.2, {shortRotation:{rotation:0}});
-//			this.rotation = 0;
 			_froggerMC.gotoAndPlay(_moveAnimationKeyName);
+			this.moveVertical("-" + _moveVerticalFactor.toString());
 		}
 
 		override protected function moveRight() : void
 		{
 			TweenMax.to(this, 0.2, {shortRotation:{rotation:90}});
-//			this.rotation = 90;
 			_froggerMC.gotoAndPlay(_moveAnimationKeyName);
+			this.moveHorizontal(_moveHorizontalFactor.toString());
 		}
 
 		override protected function moveLeft() : void
 		{
 			TweenMax.to(this, 0.2, {shortRotation:{rotation:270}});
-//			this.rotation = 270;
 			_froggerMC.gotoAndPlay(_moveAnimationKeyName);
+			this.moveHorizontal("-" + _moveHorizontalFactor.toString());
 		}
 
-		private function moveHorizontal(factor : int) : void
+		private function moveHorizontal(factor : String) : void
 		{
+			TweenMax.to(this, 0.4, {x:factor});
 		}
 
-		private function moveVertical(factor : int) : void
+		private function moveVertical(factor : String) : void
 		{
+			TweenMax.to(this, 0.4, {y:factor});
 		}
 
 		public function removeKeyboardListener() : void
