@@ -3,6 +3,8 @@ package de.crowdpark.froggler.components
 	import com.greensock.TweenMax;
 
 	import flash.display.MovieClip;
+	import flash.events.Event;
+	import flash.events.IEventDispatcher;
 
 	/**
 	 * @author Francis Varga
@@ -11,6 +13,7 @@ package de.crowdpark.froggler.components
 	{
 		private var _targetMovementMC : MovieClip;
 		private var _xEndpoint : int;
+		private var _xStartPoint : int;
 
 		public function MediumCar()
 		{
@@ -21,21 +24,26 @@ package de.crowdpark.froggler.components
 		{
 			if (!_targetMovementMC) throw new Error();
 
-			_targetMovementMC.addChild(this);
+			this.addEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
+			this.x = this._xStartPoint;
 
-			begintoMove();
+			_targetMovementMC.addChild(this);
 		}
 
-		private function begintoMove() : void
+		private function onAddedToStage(event : Event) : void
+		{
+			IEventDispatcher(event.currentTarget).removeEventListener(event.type, arguments['callee']);
+			move();
+		}
+
+		override protected function move() : void
 		{
 			TweenMax.to(this, 1, {x:xEndpoint, onComplete:onMoveComplete});
 		}
 
-		private function onMoveComplete() : void
+		override protected function onMoveComplete() : void
 		{
-			this.dispose();
 			
-			_targetMovementMC.removeChild(this);
 		}
 
 		public function get xEndpoint() : int
@@ -51,6 +59,11 @@ package de.crowdpark.froggler.components
 		public function set xEndpoint(xEndpoint : int) : void
 		{
 			_xEndpoint = xEndpoint;
+		}
+
+		public function set xStartPoint(xStartPoint : int) : void
+		{
+			_xStartPoint = xStartPoint;
 		}
 	}
 }

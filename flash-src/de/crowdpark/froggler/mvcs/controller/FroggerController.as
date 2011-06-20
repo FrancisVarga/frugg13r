@@ -16,8 +16,8 @@ package de.crowdpark.froggler.mvcs.controller
 		private static var _Instance : FroggerController;
 		private var _froggerMC : MovieClip;
 		private var _boardMC : MovieClip;
-		private var _moveHorizontalFactor : uint = 64;
-		private var _moveVerticalFactor : uint = 64;
+		private var _moveHorizontalFactor : uint = 32;
+		private var _moveVerticalFactor : uint = 32;
 		private var _defaultX : int;
 		private var _defaultY : int;
 		private var _moveAnimationKeyName : String = "jump";
