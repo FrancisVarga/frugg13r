@@ -1,15 +1,43 @@
 package de.crowdpark.froggler.mvcs.core
 {
+	import flash.display.MovieClip;
+	import flash.events.Event;
+	import flash.events.IEventDispatcher;
+
 	/**
 	 * @author Francis Varga
 	 */
 	public class AbstractBoardToken extends AbstractInteractiveComponent
 	{
-		private var _automove : Boolean = true;
+		protected var _automove : Boolean = true;
+		protected var _targetMovementMC : MovieClip;
+		protected var _xEndpoint : int;
+		protected var _xStartPoint : int;
 
 		public function AbstractBoardToken()
 		{
 			super();
+		}
+
+		public function set targetMovementMC(targetMovementMC : MovieClip) : void
+		{
+			_targetMovementMC = targetMovementMC;
+		}
+
+		public function init() : void
+		{
+			if (!_targetMovementMC) throw new Error("Target MC is NULL!!!");
+
+			this.addEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
+			this.x = this._xStartPoint;
+
+			_targetMovementMC.addChild(this);
+		}
+
+		protected function onAddedToStage(event : Event) : void
+		{
+			IEventDispatcher(event.currentTarget).removeEventListener(event.type, arguments['callee']);
+			move();
 		}
 
 		protected function move() : void
@@ -18,6 +46,7 @@ package de.crowdpark.froggler.mvcs.core
 
 		protected function onMoveComplete() : void
 		{
+			dispose();
 		}
 
 		protected function moveForward() : void
@@ -43,6 +72,16 @@ package de.crowdpark.froggler.mvcs.core
 		public function set automove(automove : Boolean) : void
 		{
 			_automove = automove;
+		}
+
+		public function set xStartPoint(xStartPoint : int) : void
+		{
+			_xStartPoint = xStartPoint;
+		}
+
+		public function set xEndpoint(xEndpoint : int) : void
+		{
+			_xEndpoint = xEndpoint;
 		}
 	}
 }
