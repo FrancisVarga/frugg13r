@@ -1,7 +1,5 @@
 package de.crowdpark.froggler.components
 {
-	import com.greensock.TweenMax;
-
 	/**
 	 * @author Francis Varga
 	 */
@@ -10,11 +8,6 @@ package de.crowdpark.froggler.components
 		public function MediumCar()
 		{
 			super();
-		}
-
-		override protected function move() : void
-		{
-			// TweenMax.to(this, 1, {x:_, onComplete:onMoveComplete});
 		}
 	}
 }

@@ -1,6 +1,5 @@
 package de.crowdpark.froggler.components
 {
-
 	/**
 	 * @author Francis Varga
 	 */
