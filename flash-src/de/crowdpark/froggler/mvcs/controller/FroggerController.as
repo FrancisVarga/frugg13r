@@ -37,7 +37,7 @@ package de.crowdpark.froggler.mvcs.controller
 			this.addEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
 		}
 
-		private function onAddedToStage(event : Event) : void
+		override protected function onAddedToStage(event : Event) : void
 		{
 			IEventDispatcher(event.currentTarget).removeEventListener(event.type, arguments['callee']);
 
@@ -78,7 +78,7 @@ package de.crowdpark.froggler.mvcs.controller
 			return;
 		}
 
-		public function init() : void
+		override public function init() : void
 		{
 			_boardMC.addChild(this);
 		}
@@ -149,7 +149,6 @@ package de.crowdpark.froggler.mvcs.controller
 		private function moveHorizontal(factor : String) : void
 		{
 			var newX : int = this.x + _froggerMC.width + parseInt(factor);
-			
 
 			if (newX > 810) return;
 			if (newX < 90) return;
@@ -160,10 +159,10 @@ package de.crowdpark.froggler.mvcs.controller
 		private function moveVertical(factor : String) : void
 		{
 			var newY : int = this.y + _froggerMC.height + parseInt(factor);
-			
-			if(newY > 800) return;
-			if(newY < 90) return;
-			
+
+			if (newY > 800) return;
+			if (newY < 90) return;
+
 			TweenMax.to(this, 0.4, {y:factor});
 		}
 
