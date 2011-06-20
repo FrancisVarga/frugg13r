@@ -12,17 +12,14 @@ package de.crowdpark.froggler.mvcs.controller
 	public class StreetEnemyController extends AbstractEnemyController
 	{
 		private static var _Instance : StreetEnemyController;
+
 		public static function get Instance() : StreetEnemyController
 		{
 			if (!_Instance) _Instance = new  StreetEnemyController();
 
 			return _Instance;
 		}
-
-		public function dispose() : void
-		{
-		}
-
+		
 		override protected function setOfItems() : void
 		{
 			_listOfItems = new Array();

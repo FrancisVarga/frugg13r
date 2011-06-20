@@ -13,7 +13,7 @@ package de.crowdpark.froggler.mvcs.core
 	public class AbstractEnemyController extends EventDispatcher
 	{
 		protected var _targetList : Array;
-		protected var _timerDurationToAddItem : uint;
+		protected var _timerDurationToAddItem : uint = 400;
 		protected var _addingItemTimer : Timer;
 		protected var _listOfItems : Array;
 
@@ -28,8 +28,8 @@ package de.crowdpark.froggler.mvcs.core
 			var item : AbstractBoardToken = new _listOfItems[randomIntegerWithinRange(0, _listOfItems.length - 1)];
 			item.targetMovementMC = street;
 			item.xStartPoint = item.width + street.width + 30;
-			item.xEndpoint = 0 - (item.width + 100);
-			item.moveDuration = 6;
+			item.xEndpoint = -(item.width + 300);
+			item.moveDuration = 16;
 			item.init();
 		}
 		
