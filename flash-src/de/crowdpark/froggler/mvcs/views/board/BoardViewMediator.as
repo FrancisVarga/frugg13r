@@ -1,5 +1,7 @@
 package de.crowdpark.froggler.mvcs.views.board
 {
+	import com.adobe.serialization.json.JSON;
+
 	import de.crowdpark.froggler.mvcs.controller.CollisionController;
 	import de.crowdpark.froggler.mvcs.controller.FroggerController;
 	import de.crowdpark.froggler.mvcs.controller.StreetEnemyController;
@@ -34,6 +36,9 @@ package de.crowdpark.froggler.mvcs.views.board
 
 		private function onStartGame(event : BoardViewEvent) : void
 		{
+			CollisionController.Instance.targetView = _boardView;
+			CollisionController.Instance.init();
+
 			WaterEnemysController.Instance.targetList = _boardView.waterArray;
 			WaterEnemysController.Instance.init();
 
@@ -41,11 +46,6 @@ package de.crowdpark.froggler.mvcs.views.board
 			StreetEnemyController.Instance.init();
 
 			FroggerController.Instance.boardMC = _boardView;
-
-			CollisionController.Instance.targetView = _boardView;
-			CollisionController.Instance.init();
-			CollisionController.Instance.addCollisionList(WaterEnemysController.Instance.targetList);
-			CollisionController.Instance.addCollisionList(StreetEnemyController.Instance.targetList);
 
 			_boardView.addEventListener(Event.ENTER_FRAME, onEnterFrame);
 		}
@@ -56,6 +56,7 @@ package de.crowdpark.froggler.mvcs.views.board
 
 			if (collisions.length)
 			{
+				trace(JSON.encode(collisions));
 			}
 		}
 	}

@@ -1,5 +1,6 @@
 package de.crowdpark.froggler.mvcs.core
 {
+	import de.crowdpark.froggler.mvcs.controller.CollisionController;
 	import utils.number.randomIntegerWithinRange;
 
 	import flash.display.MovieClip;
@@ -26,11 +27,14 @@ package de.crowdpark.froggler.mvcs.core
 		{
 			var street : MovieClip = this.getRandomTargetItem();
 			var item : AbstractBoardToken = new _listOfItems[randomIntegerWithinRange(0, _listOfItems.length - 1)];
+			
 			item.targetMovementMC = street;
 			item.xStartPoint = item.width + street.width + 30;
 			item.xEndpoint = -(item.width + 300);
 			item.moveDuration = 16;
 			item.init();
+			
+			CollisionController.Instance.addCollisionItems(item);
 		}
 		
 		public function init() : void
