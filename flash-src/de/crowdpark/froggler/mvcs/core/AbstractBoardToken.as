@@ -98,5 +98,15 @@ package de.crowdpark.froggler.mvcs.core
 		protected function moveInALine() : void
 		{
 		}
+
+		public function get isAccessible() : Boolean
+		{
+			return false;
+		}
+
+		public function get following() : Boolean
+		{
+			return false;
+		}
 	}
 }

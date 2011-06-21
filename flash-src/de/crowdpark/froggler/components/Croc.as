@@ -10,5 +10,10 @@ package de.crowdpark.froggler.components
 		{
 			super();
 		}
+		
+		override public function get isAccessible() : Boolean
+		{
+			return false;
+		}
 	}
 }
