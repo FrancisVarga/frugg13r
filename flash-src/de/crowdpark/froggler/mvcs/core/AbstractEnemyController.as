@@ -1,5 +1,7 @@
 package de.crowdpark.froggler.mvcs.core
 {
+	import de.crowdpark.froggler.mvcs.controller.FroggerControllerEvent;
+	import de.crowdpark.froggler.mvcs.controller.FroggerController;
 	import utils.number.randomIntegerWithinRange;
 
 	import flash.display.MovieClip;
@@ -39,6 +41,14 @@ package de.crowdpark.froggler.mvcs.core
 			setOfItems();
 			initAddItemTimer();
 			beginMovingItems();
+			
+			FroggerController.Instance.addEventListener(FroggerControllerEvent.DIE, onFrogDie);
+		}
+
+		private function onFrogDie(event : FroggerControllerEvent) : void
+		{
+			_addingItemTimer.reset();
+			_addingItemTimer.stop();
 		}
 
 		protected function initAddItemTimer() : void

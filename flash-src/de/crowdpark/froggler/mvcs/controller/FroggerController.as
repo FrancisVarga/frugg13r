@@ -1,5 +1,7 @@
 package de.crowdpark.froggler.mvcs.controller
 {
+	import de.crowdpark.froggler.mvcs.commands.FinishGameCommand;
+	import utils.display.wait;
 	import com.greensock.TweenMax;
 
 	import flash.display.MovieClip;
@@ -57,6 +59,12 @@ package de.crowdpark.froggler.mvcs.controller
 		{
 			_froggerMC.gotoAndPlay(_deadAnimationKeyName);
 			dispatchEvent(new FroggerControllerEvent(FroggerControllerEvent.DIE));
+			wait(30, onWaitComplete);
+		}
+
+		private function onWaitComplete() : void
+		{
+			new FinishGameCommand();
 		}
 
 		public function win() : void
