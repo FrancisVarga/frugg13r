@@ -35,12 +35,11 @@ package de.crowdpark.froggler.mvcs.views.main
 		
 		private function onScoreClicked(event : MouseEvent) : void
 		{
-			trace("Score clicked");
+			
 		}
 
 		private function onStartClicked(event : MouseEvent) : void
 		{
-			trace("Start clicked");
 			new StartGameCommand();
 		}
 

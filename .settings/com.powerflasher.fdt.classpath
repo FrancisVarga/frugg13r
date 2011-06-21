@@ -15,4 +15,5 @@
     <AS3Classpath generateProblems="true" sdkBased="false" type="source" useAsSharedCode="false">libs/as3Utils/src</AS3Classpath>
     <AS3Classpath generateProblems="false" sdkBased="false" type="lib" useAsSharedCode="false">libs/frogger.swc</AS3Classpath>
     <AS3Classpath generateProblems="true" sdkBased="false" type="source" useAsSharedCode="false">libs/coreyoneil</AS3Classpath>
+    <AS3Classpath generateProblems="false" sdkBased="false" type="lib" useAsSharedCode="false">libs/flixel.swc</AS3Classpath>
 </AS3Classpath>

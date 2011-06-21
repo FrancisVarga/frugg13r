@@ -60,5 +60,10 @@ package de.crowdpark.froggler.mvcs.core
 		{
 			_timerDurationToAddItem = timerDurationToAddItem;
 		}
+
+		public function get targetList() : Array
+		{
+			return _targetList;
+		}
 	}
 }

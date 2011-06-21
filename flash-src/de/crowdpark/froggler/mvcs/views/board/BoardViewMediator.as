@@ -1,11 +1,13 @@
 package de.crowdpark.froggler.mvcs.views.board
 {
+	import de.crowdpark.froggler.mvcs.controller.CollisionController;
 	import de.crowdpark.froggler.mvcs.controller.FroggerController;
 	import de.crowdpark.froggler.mvcs.controller.StreetEnemyController;
 	import de.crowdpark.froggler.mvcs.controller.WaterEnemysController;
 	import de.crowdpark.froggler.mvcs.core.AbstractMediator;
 
 	import flash.display.MovieClip;
+	import flash.events.Event;
 
 	/**
 	 * @author Francis Varga
@@ -20,6 +22,11 @@ package de.crowdpark.froggler.mvcs.views.board
 			_boardView = (this.view as BoardView);
 		}
 
+		override public function dispose() : void
+		{
+			_boardView.removeEventListener(Event.ENTER_FRAME, onEnterFrame);
+		}
+
 		override protected function registerEvents() : void
 		{
 			view.addEventListener(BoardViewEvent.START_GAME, onStartGame);
@@ -27,15 +34,29 @@ package de.crowdpark.froggler.mvcs.views.board
 
 		private function onStartGame(event : BoardViewEvent) : void
 		{
-			trace("onStart");
 			WaterEnemysController.Instance.targetList = _boardView.waterArray;
 			WaterEnemysController.Instance.init();
-			
+
 			StreetEnemyController.Instance.tartgetList = _boardView.streetArray;
 			StreetEnemyController.Instance.init();
-			
+
 			FroggerController.Instance.boardMC = _boardView;
+
+			CollisionController.Instance.targetView = _boardView;
+			CollisionController.Instance.init();
+			CollisionController.Instance.addCollisionList(WaterEnemysController.Instance.targetList);
+			CollisionController.Instance.addCollisionList(StreetEnemyController.Instance.targetList);
+
+			_boardView.addEventListener(Event.ENTER_FRAME, onEnterFrame);
 		}
-		
+
+		private function onEnterFrame(event : Event) : void
+		{
+			var collisions : Array = CollisionController.Instance.getCollisions();
+
+			if (collisions.length)
+			{
+			}
+		}
 	}
 }
