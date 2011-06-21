@@ -1,5 +1,6 @@
 package de.crowdpark.froggler.mvcs.core
 {
+	import de.crowdpark.froggler.mvcs.controller.CollisionDetectionBitMap;
 	import de.crowdpark.froggler.mvcs.controller.FroggerControllerEvent;
 	import de.crowdpark.froggler.mvcs.controller.FroggerController;
 
@@ -76,6 +77,7 @@ package de.crowdpark.froggler.mvcs.core
 		override public function dispose() : void
 		{
 			_moveTween.kill();
+			CollisionDetectionBitMap.Instance.removeHitItem(this);
 			_targetMovementMC.removeChild(this);
 		}
 
@@ -88,6 +90,7 @@ package de.crowdpark.froggler.mvcs.core
 		protected function move() : void
 		{
 			_moveTween = TweenMax.to(this, _moveDuration, {x:_xEndpoint, onComplete:dispose});
+			CollisionDetectionBitMap.Instance.addHitItem(this);
 		}
 
 		protected function moveForward() : void
