@@ -19,7 +19,7 @@ package de.crowdpark.froggler.mvcs.controller
 
 			return _Instance;
 		}
-		
+
 		override protected function setOfItems() : void
 		{
 			_listOfItems = new Array();
