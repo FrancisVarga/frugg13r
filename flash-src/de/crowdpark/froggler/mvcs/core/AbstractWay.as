@@ -7,7 +7,7 @@ package de.crowdpark.froggler.mvcs.core
 	public class AbstractWay extends MovieClip
 	{
 		private var _direction : Boolean;
-
+		
 		public function get direction() : Boolean
 		{
 			return _direction;

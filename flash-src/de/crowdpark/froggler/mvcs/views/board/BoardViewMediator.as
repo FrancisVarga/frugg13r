@@ -1,15 +1,12 @@
 package de.crowdpark.froggler.mvcs.views.board
 {
-	import com.adobe.serialization.json.JSON;
-
-	import de.crowdpark.froggler.mvcs.controller.CollisionController;
+	import de.crowdpark.froggler.mvcs.controller.CollisionDetectionBitMap;
 	import de.crowdpark.froggler.mvcs.controller.FroggerController;
 	import de.crowdpark.froggler.mvcs.controller.StreetEnemyController;
 	import de.crowdpark.froggler.mvcs.controller.WaterEnemysController;
 	import de.crowdpark.froggler.mvcs.core.AbstractMediator;
 
 	import flash.display.MovieClip;
-	import flash.events.Event;
 
 	/**
 	 * @author Francis Varga
@@ -26,7 +23,6 @@ package de.crowdpark.froggler.mvcs.views.board
 
 		override public function dispose() : void
 		{
-			_boardView.removeEventListener(Event.ENTER_FRAME, onEnterFrame);
 		}
 
 		override protected function registerEvents() : void
@@ -36,9 +32,6 @@ package de.crowdpark.froggler.mvcs.views.board
 
 		private function onStartGame(event : BoardViewEvent) : void
 		{
-			CollisionController.Instance.targetView = _boardView;
-			CollisionController.Instance.init();
-
 			WaterEnemysController.Instance.targetList = _boardView.waterArray;
 			WaterEnemysController.Instance.init();
 
@@ -46,18 +39,8 @@ package de.crowdpark.froggler.mvcs.views.board
 			StreetEnemyController.Instance.init();
 
 			FroggerController.Instance.boardMC = _boardView;
-
-			_boardView.addEventListener(Event.ENTER_FRAME, onEnterFrame);
-		}
-
-		private function onEnterFrame(event : Event) : void
-		{
-			var collisions : Array = CollisionController.Instance.getCollisions();
-
-			if (collisions.length)
-			{
-				trace(JSON.encode(collisions));
-			}
+			
+			CollisionDetectionBitMap.Instance;
 		}
 	}
 }

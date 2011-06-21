@@ -1,5 +1,6 @@
 package de.crowdpark.froggler.mvcs.views.board
 {
+	import de.crowdpark.froggler.components.Water;
 	import com.greensock.TweenMax;
 
 	/**
@@ -58,7 +59,9 @@ package de.crowdpark.froggler.mvcs.views.board
 		{
 			for (var i : int = 1; i < _maxWater; i++)
 			{
-				_waterArray.push(this.getChildByName("water" + i));
+				var water : Water = (this.getChildByName("water" + i) as Water);
+				water.init();
+				_waterArray.push(water);
 			}
 		}
 

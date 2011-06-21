@@ -1,5 +1,8 @@
 package de.crowdpark.froggler.mvcs.core
 {
+	import de.crowdpark.froggler.mvcs.controller.FroggerControllerEvent;
+	import de.crowdpark.froggler.mvcs.controller.FroggerController;
+
 	import com.greensock.TweenMax;
 
 	import flash.display.MovieClip;
@@ -16,6 +19,9 @@ package de.crowdpark.froggler.mvcs.core
 		protected var _xEndpoint : int;
 		protected var _xStartPoint : int;
 		protected var _moveDuration : int;
+		private var _moveTween : TweenMax;
+		private var _alphaTween : TweenMax;
+		private var _frog : FroggerController;
 
 		public function AbstractBoardToken()
 		{
@@ -36,6 +42,15 @@ package de.crowdpark.froggler.mvcs.core
 			this.alpha = 0;
 
 			_targetMovementMC.addChild(this);
+			
+			_frog = FroggerController.Instance;
+			_frog.addEventListener(FroggerControllerEvent.DIE, onFrogDie);
+		}
+
+		private function onFrogDie(event : FroggerControllerEvent) : void
+		{
+			IEventDispatcher(event.currentTarget).removeEventListener(event.type, arguments['callee']);
+			_alphaTween.reverse(true);
 		}
 
 		public function set automove(automove : Boolean) : void
@@ -60,23 +75,19 @@ package de.crowdpark.froggler.mvcs.core
 
 		override public function dispose() : void
 		{
+			_moveTween.kill();
 			_targetMovementMC.removeChild(this);
 		}
 
 		protected function onAddedToStage(event : Event) : void
 		{
 			IEventDispatcher(event.currentTarget).removeEventListener(event.type, arguments['callee']);
-			TweenMax.to(this, 0.3, {autoAlpha:1, onComplete:move});
+			_alphaTween = TweenMax.to(this, 0.3, {autoAlpha:1, onComplete:move});
 		}
 
 		protected function move() : void
 		{
-			TweenMax.to(this, _moveDuration, {x:_xEndpoint, onComplete:onMoveComplete});
-		}
-
-		protected function onMoveComplete() : void
-		{
-			dispose();
+			_moveTween = TweenMax.to(this, _moveDuration, {x:_xEndpoint, onComplete:dispose});
 		}
 
 		protected function moveForward() : void

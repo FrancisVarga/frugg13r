@@ -1,6 +1,5 @@
 package de.crowdpark.froggler.mvcs.core
 {
-	import de.crowdpark.froggler.mvcs.controller.CollisionController;
 	import utils.number.randomIntegerWithinRange;
 
 	import flash.display.MovieClip;
@@ -14,7 +13,7 @@ package de.crowdpark.froggler.mvcs.core
 	public class AbstractEnemyController extends EventDispatcher
 	{
 		protected var _targetList : Array;
-		protected var _timerDurationToAddItem : uint = 400;
+		protected var _timerDurationToAddItem : uint = 1000;
 		protected var _addingItemTimer : Timer;
 		protected var _listOfItems : Array;
 
@@ -22,28 +21,26 @@ package de.crowdpark.froggler.mvcs.core
 		{
 			return _targetList[randomIntegerWithinRange(0, _targetList.length - 1)];
 		}
-		
+
 		protected function beginMovingItems(event : TimerEvent = null) : void
 		{
 			var street : MovieClip = this.getRandomTargetItem();
 			var item : AbstractBoardToken = new _listOfItems[randomIntegerWithinRange(0, _listOfItems.length - 1)];
-			
+
 			item.targetMovementMC = street;
 			item.xStartPoint = item.width + street.width + 30;
 			item.xEndpoint = -(item.width + 300);
 			item.moveDuration = 16;
 			item.init();
-			
-			CollisionController.Instance.addCollisionItems(item);
 		}
-		
+
 		public function init() : void
 		{
 			setOfItems();
 			initAddItemTimer();
 			beginMovingItems();
 		}
-		
+
 		protected function initAddItemTimer() : void
 		{
 			_addingItemTimer = new Timer(_timerDurationToAddItem);

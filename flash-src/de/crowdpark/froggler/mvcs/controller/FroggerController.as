@@ -56,6 +56,7 @@ package de.crowdpark.froggler.mvcs.controller
 		public function die() : void
 		{
 			_froggerMC.gotoAndPlay(_deadAnimationKeyName);
+			dispatchEvent(new FroggerControllerEvent(FroggerControllerEvent.DIE));
 		}
 
 		public function win() : void
@@ -161,7 +162,7 @@ package de.crowdpark.froggler.mvcs.controller
 			var newY : int = this.y + _froggerMC.height + parseInt(factor);
 
 			if (newY > 800) return;
-			if (newY < 90) return;
+			if (newY < 35) return;
 
 			TweenMax.to(this, 0.4, {y:factor});
 		}
