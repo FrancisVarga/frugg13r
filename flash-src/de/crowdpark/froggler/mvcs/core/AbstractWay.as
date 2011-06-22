@@ -17,5 +17,10 @@ package de.crowdpark.froggler.mvcs.core
 		{
 			_direction = direction;
 		}
+		
+		public function isWinnerStage():Boolean
+		{
+			return false;
+		}
 	}
 }

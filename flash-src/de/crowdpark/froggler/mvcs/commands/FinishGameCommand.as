@@ -3,6 +3,7 @@ package de.crowdpark.froggler.mvcs.commands
 	import utils.display.wait;
 
 	import de.crowdpark.froggler.mvcs.core.AbstractCommand;
+	import de.crowdpark.froggler.mvcs.views.start.StartView;
 
 	/**
 	 * @author Francis Varga
@@ -17,6 +18,8 @@ package de.crowdpark.froggler.mvcs.commands
 
 		private function onWaitComplete() : void
 		{
+			context.root.gotoAndPlay("titleIn");			
+			StartView.Instance.show();
 		}
 	}
 }

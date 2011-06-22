@@ -1,5 +1,6 @@
 package de.crowdpark.froggler.mvcs.views.start
 {
+	import utils.display.bringToFront;
 	import flash.events.MouseEvent;
 
 	import com.greensock.*;
@@ -77,7 +78,10 @@ package de.crowdpark.froggler.mvcs.views.start
 
 		override public function show() : void
 		{
-			TweenMax.to(this, 0.5, {x:-41, y:85});
+			
+			bringToFront(this);
+			
+			TweenMax.to(this, 0.5, {x:-41, y:85, alpha:1});
 
 			TweenMax.to(_startButton, 0.5, new TweenMaxVars().autoAlpha(1));
 			TweenMax.to(_scoreButton, 0.5, new TweenMaxVars().autoAlpha(1));

@@ -43,7 +43,7 @@ package de.crowdpark.froggler.mvcs.core
 			this.alpha = 0;
 
 			_targetMovementMC.addChild(this);
-			
+
 			_frog = FroggerController.Instance;
 			_frog.addEventListener(FroggerControllerEvent.DIE, onFrogDie);
 		}
@@ -78,6 +78,7 @@ package de.crowdpark.froggler.mvcs.core
 		{
 			_moveTween.kill();
 			CollisionDetectionBitMap.Instance.removeHitItem(this);
+
 			_targetMovementMC.removeChild(this);
 		}
 

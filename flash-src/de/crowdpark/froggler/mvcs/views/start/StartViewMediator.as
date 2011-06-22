@@ -37,7 +37,7 @@ package de.crowdpark.froggler.mvcs.views.start
 
 		private function onStartGame(event : StartViewEvent) : void
 		{
-			TweenMax.to(view, 0.3, {autoAlpha:0});
+			TweenMax.to(view, 0.3, {alpha:0});
 			new StartGameCommand();
 		}
 	}

@@ -1,6 +1,7 @@
 package de.crowdpark.froggler.mvcs.views.board
 {
 	import de.crowdpark.froggler.components.Water;
+
 	import com.greensock.TweenMax;
 
 	/**
@@ -32,17 +33,17 @@ package de.crowdpark.froggler.mvcs.views.board
 			this.alpha = 0;
 			this.x = 2000;
 			gameRoot.addChild(this);
-			TweenMax.to(this, 0.4, {autoAlpha:1, x:0, onComplete:onShowTweenComplete});
+			TweenMax.to(this, 0.4, {autoAlpha:1, x:0, onComplete:startGame});
 		}
-
-		private function onShowTweenComplete() : void
-		{
-			dispatchEvent(new BoardViewEvent(BoardViewEvent.START_GAME));
-		}
-
+		
 		override protected function initMediator() : void
 		{
 			this.mediator = new BoardViewMediator();
+		}
+
+		public function startGame() : void
+		{
+			dispatchEvent(new BoardViewEvent(BoardViewEvent.START_GAME));
 		}
 
 		public function get waterArray() : Array

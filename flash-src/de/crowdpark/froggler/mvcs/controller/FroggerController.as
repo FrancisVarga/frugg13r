@@ -1,7 +1,9 @@
 package de.crowdpark.froggler.mvcs.controller
 {
-	import de.crowdpark.froggler.mvcs.commands.FinishGameCommand;
 	import utils.display.wait;
+
+	import de.crowdpark.froggler.mvcs.commands.FinishGameCommand;
+
 	import com.greensock.TweenMax;
 
 	import flash.display.MovieClip;
@@ -26,6 +28,7 @@ package de.crowdpark.froggler.mvcs.controller
 		private var _deadAnimationKeyName : String = "dead";
 		private var _idleAnimationKeyName : String = "idle";
 		private var _dissappearAnimationKeyName : String = "dissappear";
+		private var _movementDuration : uint = 0.3;
 
 		public static function get Instance() : FroggerController
 		{
@@ -59,7 +62,7 @@ package de.crowdpark.froggler.mvcs.controller
 		{
 			_froggerMC.gotoAndPlay(_deadAnimationKeyName);
 			dispatchEvent(new FroggerControllerEvent(FroggerControllerEvent.DIE));
-			wait(30, onWaitComplete);
+			wait(40, onWaitComplete);
 		}
 
 		private function onWaitComplete() : void
@@ -129,28 +132,28 @@ package de.crowdpark.froggler.mvcs.controller
 
 		override protected function moveBack() : void
 		{
-			TweenMax.to(this, 0.2, {shortRotation:{rotation:180}});
+			TweenMax.to(this, _movementDuration, {shortRotation:{rotation:180}});
 			_froggerMC.gotoAndPlay(_moveAnimationKeyName);
 			this.moveVertical(_moveVerticalFactor.toString());
 		}
 
 		override protected function moveForward() : void
 		{
-			TweenMax.to(this, 0.2, {shortRotation:{rotation:0}});
+			TweenMax.to(this, _movementDuration, {shortRotation:{rotation:0}});
 			_froggerMC.gotoAndPlay(_moveAnimationKeyName);
 			this.moveVertical("-" + _moveVerticalFactor.toString());
 		}
 
 		override protected function moveRight() : void
 		{
-			TweenMax.to(this, 0.2, {shortRotation:{rotation:90}});
+			TweenMax.to(this, _movementDuration, {shortRotation:{rotation:90}});
 			_froggerMC.gotoAndPlay(_moveAnimationKeyName);
 			this.moveHorizontal(_moveHorizontalFactor.toString());
 		}
 
 		override protected function moveLeft() : void
 		{
-			TweenMax.to(this, 0.2, {shortRotation:{rotation:270}});
+			TweenMax.to(this, _movementDuration, {shortRotation:{rotation:270}});
 			_froggerMC.gotoAndPlay(_moveAnimationKeyName);
 			this.moveHorizontal("-" + _moveHorizontalFactor.toString());
 		}
