@@ -41,7 +41,7 @@ package de.crowdpark.froggler.mvcs.core
 			this.addEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
 			this.x = this._xStartPoint;
 			this.alpha = 0;
-
+			
 			_targetMovementMC.addChild(this);
 
 			_frog = FroggerController.Instance;

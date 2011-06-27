@@ -1,5 +1,6 @@
 package de.crowdpark.froggler.mvcs.core
 {
+	import de.crowdpark.froggler.mvcs.views.board.BoardView;
 	import de.crowdpark.froggler.mvcs.controller.FroggerControllerEvent;
 	import de.crowdpark.froggler.mvcs.controller.FroggerController;
 
@@ -33,10 +34,12 @@ package de.crowdpark.froggler.mvcs.core
 			var street : MovieClip = this.getRandomTargetItem();
 			var item : AbstractBoardToken = new _listOfItems[randomIntegerWithinRange(0, _listOfItems.length - 1)];
 
-			item.targetMovementMC = street;
-			item.xStartPoint = item.width + street.width + _xStartPointAddOn;
-			item.xEndpoint = -(item.width + _xEndPointAddOn);
-			item.moveDuration = _moveDuration;
+			// item.targetMovementMC = street;
+			item.targetMovementMC 	= BoardView.Instance;
+			item.xStartPoint 		= item.width + street.width + _xStartPointAddOn;
+			item.xEndpoint 			= -(item.width + _xEndPointAddOn);
+			item.y 					= street.y;
+			item.moveDuration 		= _moveDuration;
 			item.init();
 		}
 

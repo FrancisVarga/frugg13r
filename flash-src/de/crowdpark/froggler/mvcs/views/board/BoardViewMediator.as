@@ -1,5 +1,6 @@
 package de.crowdpark.froggler.mvcs.views.board
 {
+	import de.crowdpark.froggler.mvcs.views.hud.GameHudView;
 	import de.crowdpark.froggler.mvcs.controller.CollisionDetectionBitMap;
 	import de.crowdpark.froggler.mvcs.controller.FroggerController;
 	import de.crowdpark.froggler.mvcs.controller.StreetEnemyController;
@@ -18,6 +19,7 @@ package de.crowdpark.froggler.mvcs.views.board
 		override public function init(view : MovieClip) : void
 		{
 			_boardView = (view as BoardView);
+			_boardView.addChild(GameHudView.Instance);
 			setTargetLists();
 
 			super.init(view);

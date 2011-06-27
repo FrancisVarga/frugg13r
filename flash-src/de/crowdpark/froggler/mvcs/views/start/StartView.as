@@ -1,16 +1,13 @@
 package de.crowdpark.froggler.mvcs.views.start
 {
-	import de.crowdpark.froggler.mvcs.core.AbstractViewEvent;
-
 	import utils.display.bringToFront;
-
-	import flash.events.MouseEvent;
 
 	import com.greensock.*;
 	import com.greensock.data.*;
 
 	import flash.display.MovieClip;
 	import flash.events.Event;
+	import flash.events.MouseEvent;
 
 	/**
 	 * @author Francis Varga

@@ -1,17 +1,15 @@
 package de.crowdpark.froggler.mvcs.views.start
 {
-	import flash.ui.Keyboard;
-	import flash.ui.KeyboardType;
-	import flash.events.KeyboardEvent;
-
-	import de.crowdpark.froggler.mvcs.core.AbstractViewEvent;
 	import de.crowdpark.froggler.mvcs.commands.StartGameCommand;
 	import de.crowdpark.froggler.mvcs.core.AbstractMediator;
+	import de.crowdpark.froggler.mvcs.core.AbstractViewEvent;
 	import de.crowdpark.froggler.mvcs.views.scores.ScoresView;
 
 	import com.greensock.TweenMax;
 
 	import flash.events.IEventDispatcher;
+	import flash.events.KeyboardEvent;
+	import flash.ui.Keyboard;
 
 	/**
 	 * @author Francis Varga
