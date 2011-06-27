@@ -1,5 +1,10 @@
 package de.crowdpark.froggler.mvcs.views.start
 {
+	import flash.ui.Keyboard;
+	import flash.ui.KeyboardType;
+	import flash.events.KeyboardEvent;
+
+	import de.crowdpark.froggler.mvcs.core.AbstractViewEvent;
 	import de.crowdpark.froggler.mvcs.commands.StartGameCommand;
 	import de.crowdpark.froggler.mvcs.core.AbstractMediator;
 	import de.crowdpark.froggler.mvcs.views.scores.ScoresView;
@@ -22,12 +27,37 @@ package de.crowdpark.froggler.mvcs.views.start
 		{
 			view.addEventListener(StartViewEvent.START_GAME, onStartGame);
 			view.addEventListener(StartViewEvent.SHOW_SCORE, onShowScore);
+			view.addEventListener(AbstractViewEvent.SHOW_COMPLETE, onShowComplete);
+			view.addEventListener(AbstractViewEvent.HIDE_COMPLETE, onHideComplete);
+		}
+
+		private function onHideComplete(event : AbstractViewEvent) : void
+		{
+			view.stage.removeEventListener(KeyboardEvent.KEY_DOWN, onKeyDown);
+		}
+
+		private function onShowComplete(event : AbstractViewEvent) : void
+		{
+			view.stage.addEventListener(KeyboardEvent.KEY_DOWN, onKeyDown);
+		}
+
+		private function onKeyDown(event : KeyboardEvent) : void
+		{
+			switch(event.keyCode)
+			{
+				case Keyboard.ENTER:
+					onStartGame(new StartViewEvent(StartViewEvent.START_GAME));
+					break;
+				default :
+					break;
+			}
 		}
 
 		override public function dispose() : void
 		{
 			view.removeEventListener(StartViewEvent.START_GAME, onStartGame);
 			view.removeEventListener(StartViewEvent.SHOW_SCORE, onShowScore);
+			view.removeEventListener(AbstractViewEvent.SHOW_COMPLETE, onShowComplete);
 		}
 
 		private function onShowScore(event : StartViewEvent) : void

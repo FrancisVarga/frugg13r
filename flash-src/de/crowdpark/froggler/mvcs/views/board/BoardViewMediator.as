@@ -42,10 +42,8 @@ package de.crowdpark.froggler.mvcs.views.board
 		private function onStartGame(event : BoardViewEvent) : void
 		{
 			WaterEnemysController.Instance.init();
-
 			StreetEnemyController.Instance.init();
-
-			CollisionDetectionBitMap.Instance;
+			CollisionDetectionBitMap.Instance.init();
 		}
 	}
 }

@@ -31,6 +31,7 @@ package de.crowdpark.froggler.mvcs.controller
 		private var _idleAnimationKeyName : String = "idle";
 		private var _dissappearAnimationKeyName : String = "dissappear";
 		private var _movementDuration : uint = 0.3;
+		private var _died : Boolean;
 
 		public static function get Instance() : FroggerController
 		{
@@ -46,6 +47,7 @@ package de.crowdpark.froggler.mvcs.controller
 
 		override protected function onAddedToStage(event : Event) : void
 		{
+			_died = false;
 			IEventDispatcher(event.currentTarget).removeEventListener(event.type, arguments['callee']);
 			stage.addEventListener(KeyboardEvent.KEY_DOWN, onKeyDownHandler);
 		}
@@ -53,6 +55,7 @@ package de.crowdpark.froggler.mvcs.controller
 		public function die() : void
 		{
 			_froggerMC.gotoAndPlay(_deadAnimationKeyName);
+			_died = true;
 			dispatchEvent(new FroggerControllerEvent(FroggerControllerEvent.DIE));
 			wait(40, onWaitComplete);
 		}
@@ -93,8 +96,9 @@ package de.crowdpark.froggler.mvcs.controller
 			this.x = 0;
 			this.y = 0;
 			_froggerMC = null;
-			_moveVerticalFactor = 0;
-			_moveHorizontalFactor = 0;
+			_moveVerticalFactor = 32;
+			_moveHorizontalFactor = 32;
+			_died = false;
 
 			_defaultX = this.x += this.width / 2;
 			_moveHorizontalFactor += _defaultX;
@@ -107,7 +111,10 @@ package de.crowdpark.froggler.mvcs.controller
 		}
 
 		private function onKeyDownHandler(event : KeyboardEvent) : void
-		{
+		{	
+			
+			if(_died) return;
+			
 			var keyCode : uint = event.keyCode;
 
 			switch(keyCode)
