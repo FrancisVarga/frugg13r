@@ -1,13 +1,13 @@
-h1. Frugg13r
+h1.Frugg13r
 
-h2. Scala
+h2.Scala
 _____________________________
 
 I = 0.5 Tag
 II = 0.75 Tag
 III = 1 Tag
 
-h2. ToDo
+h2.ToDo
 _____________________________
 
 - [90%][I] hit detection* 													( 0.5 )
@@ -21,7 +21,7 @@ _____________________________
 																===========================
 																Current 	->	5 Tage
 																
-h2. Deadline
+h2.Deadline
 _____________________________
 
 - All main features*
