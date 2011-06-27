@@ -2,6 +2,7 @@ package de.crowdpark.froggler.mvcs.core
 {
 	import de.crowdpark.froggler.mvcs.controller.FroggerControllerEvent;
 	import de.crowdpark.froggler.mvcs.controller.FroggerController;
+
 	import utils.number.randomIntegerWithinRange;
 
 	import flash.display.MovieClip;
@@ -18,6 +19,9 @@ package de.crowdpark.froggler.mvcs.core
 		protected var _timerDurationToAddItem : uint = 1000;
 		protected var _addingItemTimer : Timer;
 		protected var _listOfItems : Array;
+		private var _xEndPointAddOn : uint = 300;
+		private var _xStartPointAddOn : uint = 30;
+		private var _moveDuration : uint = 16;
 
 		protected function getRandomTargetItem() : MovieClip
 		{
@@ -30,9 +34,9 @@ package de.crowdpark.froggler.mvcs.core
 			var item : AbstractBoardToken = new _listOfItems[randomIntegerWithinRange(0, _listOfItems.length - 1)];
 
 			item.targetMovementMC = street;
-			item.xStartPoint = item.width + street.width + 30;
-			item.xEndpoint = -(item.width + 300);
-			item.moveDuration = 16;
+			item.xStartPoint = item.width + street.width + _xStartPointAddOn;
+			item.xEndpoint = -(item.width + _xEndPointAddOn);
+			item.moveDuration = _moveDuration;
 			item.init();
 		}
 
@@ -41,12 +45,13 @@ package de.crowdpark.froggler.mvcs.core
 			setOfItems();
 			initAddItemTimer();
 			beginMovingItems();
-			
+
 			FroggerController.Instance.addEventListener(FroggerControllerEvent.DIE, onFrogDie);
 		}
 
 		private function onFrogDie(event : FroggerControllerEvent) : void
 		{
+			_addingItemTimer.removeEventListener(TimerEvent.TIMER, beginMovingItems);
 			_addingItemTimer.reset();
 			_addingItemTimer.stop();
 		}

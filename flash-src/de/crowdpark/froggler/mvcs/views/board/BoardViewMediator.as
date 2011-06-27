@@ -17,8 +17,10 @@ package de.crowdpark.froggler.mvcs.views.board
 
 		override public function init(view : MovieClip) : void
 		{
+			_boardView = (view as BoardView);
+			setTargetLists();
+
 			super.init(view);
-			_boardView = (this.view as BoardView);
 		}
 
 		override public function dispose() : void
@@ -30,16 +32,19 @@ package de.crowdpark.froggler.mvcs.views.board
 			view.addEventListener(BoardViewEvent.START_GAME, onStartGame);
 		}
 
-		private function onStartGame(event : BoardViewEvent) : void
+		private function setTargetLists() : void
 		{
 			WaterEnemysController.Instance.targetList = _boardView.waterArray;
+			StreetEnemyController.Instance.targetList = _boardView.streetArray;
+			FroggerController.Instance.boardMC = _boardView;
+		}
+
+		private function onStartGame(event : BoardViewEvent) : void
+		{
 			WaterEnemysController.Instance.init();
 
-			StreetEnemyController.Instance.tartgetList = _boardView.streetArray;
 			StreetEnemyController.Instance.init();
 
-			FroggerController.Instance.boardMC = _boardView;
-			
 			CollisionDetectionBitMap.Instance;
 		}
 	}

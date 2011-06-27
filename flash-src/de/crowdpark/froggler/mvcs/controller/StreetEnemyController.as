@@ -28,10 +28,5 @@ package de.crowdpark.froggler.mvcs.controller
 			_listOfItems.push(SmallCarBlue);
 			_listOfItems.push(SmallCarYellow);
 		}
-
-		public function set tartgetList(listOfTargets : Array) : void
-		{
-			_targetList = listOfTargets;
-		}
 	}
 }

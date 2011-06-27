@@ -11,11 +11,7 @@ package de.crowdpark.froggler.components
 	{
 		public function init() : void
 		{
-			this.addEventListener(Event.ENTER_FRAME, onEnterFrame);
-		}
-
-		private function onEnterFrame(event : Event) : void
-		{
+			
 		}
 	}
 }

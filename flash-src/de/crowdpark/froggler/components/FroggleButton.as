@@ -10,6 +10,8 @@ package de.crowdpark.froggler.components
 		public function FroggleButton()
 		{
 			super();
+			useHandCursor = true;
+			buttonMode = true;
 		}
 
 	}

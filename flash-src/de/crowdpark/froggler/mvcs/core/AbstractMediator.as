@@ -9,9 +9,8 @@ package de.crowdpark.froggler.mvcs.core
 	 */
 	public class AbstractMediator extends EventDispatcher implements IMediator
 	{
-		
 		private var _view : MovieClip;
-		
+
 		public function AbstractMediator(target : IEventDispatcher = null)
 		{
 			super(target);

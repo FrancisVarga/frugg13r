@@ -1,7 +1,7 @@
 package de.crowdpark.froggler.mvcs.commands
 {
-	import de.crowdpark.froggler.mvcs.views.board.BoardView;
 	import de.crowdpark.froggler.mvcs.core.AbstractCommand;
+	import de.crowdpark.froggler.mvcs.views.board.BoardView;
 
 	/**
 	 * @author Francis Varga
@@ -10,7 +10,7 @@ package de.crowdpark.froggler.mvcs.commands
 	{
 		override public function executeCommand(data : Object = null) : void
 		{
-			BoardView.Instance;
+			BoardView.Instance.startGame();
 			this.context.root.gotoAndPlay("gameIn");
 		}
 	}

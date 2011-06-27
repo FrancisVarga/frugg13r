@@ -82,6 +82,16 @@ package de.crowdpark.froggler.mvcs.core
 			_targetMovementMC.removeChild(this);
 		}
 
+		public function get isAccessible() : Boolean
+		{
+			return false;
+		}
+
+		public function get following() : Boolean
+		{
+			return false;
+		}
+
 		protected function onAddedToStage(event : Event) : void
 		{
 			IEventDispatcher(event.currentTarget).removeEventListener(event.type, arguments['callee']);
@@ -96,32 +106,27 @@ package de.crowdpark.froggler.mvcs.core
 
 		protected function moveForward() : void
 		{
+			return;
 		}
 
 		protected function moveLeft() : void
 		{
+			return;
 		}
 
 		protected function moveRight() : void
 		{
+			return;
 		}
 
 		protected function moveBack() : void
 		{
+			return;
 		}
 
 		protected function moveInALine() : void
 		{
-		}
-
-		public function get isAccessible() : Boolean
-		{
-			return false;
-		}
-
-		public function get following() : Boolean
-		{
-			return false;
+			return;
 		}
 	}
 }

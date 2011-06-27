@@ -1,5 +1,7 @@
 package de.crowdpark.froggler.mvcs.controller
 {
+	import de.crowdpark.froggler.mvcs.commands.FinishGameCommandEvent;
+
 	import utils.display.wait;
 
 	import de.crowdpark.froggler.mvcs.commands.FinishGameCommand;
@@ -45,16 +47,6 @@ package de.crowdpark.froggler.mvcs.controller
 		override protected function onAddedToStage(event : Event) : void
 		{
 			IEventDispatcher(event.currentTarget).removeEventListener(event.type, arguments['callee']);
-
-			_defaultX = this.x += this.width / 2;
-			_moveHorizontalFactor += _defaultX;
-
-			_defaultY = this.y += this.height / 2;
-			_moveVerticalFactor += _defaultY;
-
-			_froggerMC = (this.getChildByName("frog") as MovieClip);
-			_froggerMC.gotoAndPlay(_idleAnimationKeyName);
-
 			stage.addEventListener(KeyboardEvent.KEY_DOWN, onKeyDownHandler);
 		}
 
@@ -67,7 +59,13 @@ package de.crowdpark.froggler.mvcs.controller
 
 		private function onWaitComplete() : void
 		{
-			new FinishGameCommand();
+			new FinishGameCommand().addEventListener(FinishGameCommandEvent.GAME_OUT_COMPLETE, onGameOutComplete);
+		}
+
+		private function onGameOutComplete(event : FinishGameCommandEvent) : void
+		{
+			IEventDispatcher(event.currentTarget).removeEventListener(event.type, arguments['callee']);
+			init();
 		}
 
 		public function win() : void
@@ -92,7 +90,20 @@ package de.crowdpark.froggler.mvcs.controller
 
 		override public function init() : void
 		{
-			_boardMC.addChild(this);
+			this.x = 0;
+			this.y = 0;
+			_froggerMC = null;
+			_moveVerticalFactor = 0;
+			_moveHorizontalFactor = 0;
+
+			_defaultX = this.x += this.width / 2;
+			_moveHorizontalFactor += _defaultX;
+
+			_defaultY = this.y += this.height / 2;
+			_moveVerticalFactor += _defaultY;
+
+			_froggerMC = (this.getChildByName("frog") as MovieClip);
+			_froggerMC.gotoAndPlay(_idleAnimationKeyName);
 		}
 
 		private function onKeyDownHandler(event : KeyboardEvent) : void
@@ -191,6 +202,7 @@ package de.crowdpark.froggler.mvcs.controller
 		public function set boardMC(boardMC : MovieClip) : void
 		{
 			_boardMC = boardMC;
+			_boardMC.addChild(this);
 			init();
 		}
 	}
