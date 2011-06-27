@@ -30,7 +30,8 @@ package de.crowdpark.froggler.mvcs.controller
 		private var _deadAnimationKeyName : String = "dead";
 		private var _idleAnimationKeyName : String = "idle";
 		private var _dissappearAnimationKeyName : String = "dissappear";
-		private var _movementDuration : uint = 0.3;
+		private var _movementRotationDuration : int = 0.2;
+		private var _movementDuration : int = 0.3;
 		private var _died : Boolean;
 
 		public static function get Instance() : FroggerController
@@ -111,10 +112,11 @@ package de.crowdpark.froggler.mvcs.controller
 		}
 
 		private function onKeyDownHandler(event : KeyboardEvent) : void
-		{	
-			
-			if(_died) return;
-			
+		{
+			IEventDispatcher(event.currentTarget).removeEventListener(event.type, arguments['callee']);
+
+			if (_died) return;
+
 			var keyCode : uint = event.keyCode;
 
 			switch(keyCode)
@@ -150,28 +152,28 @@ package de.crowdpark.froggler.mvcs.controller
 
 		override protected function moveBack() : void
 		{
-			TweenMax.to(this, _movementDuration, {shortRotation:{rotation:180}});
+			TweenMax.to(this, _movementRotationDuration, {shortRotation:{rotation:180}});
 			_froggerMC.gotoAndPlay(_moveAnimationKeyName);
 			this.moveVertical(_moveVerticalFactor.toString());
 		}
 
 		override protected function moveForward() : void
 		{
-			TweenMax.to(this, _movementDuration, {shortRotation:{rotation:0}});
+			TweenMax.to(this, _movementRotationDuration, {shortRotation:{rotation:0}});
 			_froggerMC.gotoAndPlay(_moveAnimationKeyName);
 			this.moveVertical("-" + _moveVerticalFactor.toString());
 		}
 
 		override protected function moveRight() : void
 		{
-			TweenMax.to(this, _movementDuration, {shortRotation:{rotation:90}});
+			TweenMax.to(this, _movementRotationDuration, {shortRotation:{rotation:90}});
 			_froggerMC.gotoAndPlay(_moveAnimationKeyName);
 			this.moveHorizontal(_moveHorizontalFactor.toString());
 		}
 
 		override protected function moveLeft() : void
 		{
-			TweenMax.to(this, _movementDuration, {shortRotation:{rotation:270}});
+			TweenMax.to(this, _movementRotationDuration, {shortRotation:{rotation:270}});
 			_froggerMC.gotoAndPlay(_moveAnimationKeyName);
 			this.moveHorizontal("-" + _moveHorizontalFactor.toString());
 		}
@@ -183,7 +185,7 @@ package de.crowdpark.froggler.mvcs.controller
 			if (newX > 810) return;
 			if (newX < 90) return;
 
-			TweenMax.to(this, 0.4, {x:factor});
+			TweenMax.to(this, _movementDuration, {x:factor, onComplete:moveComplete});
 		}
 
 		private function moveVertical(factor : String) : void
@@ -193,7 +195,12 @@ package de.crowdpark.froggler.mvcs.controller
 			if (newY > 800) return;
 			if (newY < 35) return;
 
-			TweenMax.to(this, 0.4, {y:factor});
+			TweenMax.to(this, _movementDuration, {y:factor, onComplete:moveComplete});
+		}
+
+		private function moveComplete() : void
+		{
+			stage.addEventListener(KeyboardEvent.KEY_DOWN, onKeyDownHandler);
 		}
 
 		public function removeKeyboardListener() : void

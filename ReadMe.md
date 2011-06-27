@@ -1,13 +1,15 @@
-h1.Frugg13r
+#Frugg13r
 
-h2.Scala
+A fucking small game...
+
+##Scala
 _____________________________
 
 I = 0.5 Tag
 II = 0.75 Tag
 III = 1 Tag
 
-h2.ToDo
+##ToDo
 _____________________________
 
 - [90%][I] hit detection* 													( 0.5 )
@@ -21,8 +23,8 @@ _____________________________
 																===========================
 																Current 	->	5 Tage
 																
-h2.Deadline
+##Deadline
 _____________________________
 
 - All main features*
-__29.06.2011__
+- __29.06.2011__
