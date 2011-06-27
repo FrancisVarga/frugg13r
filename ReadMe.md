@@ -5,7 +5,9 @@ A fucking small game...
 ##Scala
 
 I = 0.5 Tag
+
 II = 0.75 Tag
+
 III = 1 Tag
 
 ##ToDo
