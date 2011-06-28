@@ -1,10 +1,9 @@
 package de.crowdpark.froggler.mvcs.controller
 {
-	import de.crowdpark.froggler.mvcs.commands.FinishGameCommandEvent;
-
 	import utils.display.wait;
 
 	import de.crowdpark.froggler.mvcs.commands.FinishGameCommand;
+	import de.crowdpark.froggler.mvcs.commands.FinishGameCommandEvent;
 
 	import com.greensock.TweenMax;
 
@@ -31,8 +30,8 @@ package de.crowdpark.froggler.mvcs.controller
 		private var _idleAnimationKeyName : String = "idle";
 		private var _dissappearAnimationKeyName : String = "dissappear";
 		private var _movementRotationDuration : int = 0.2;
-		private var _movementDuration : int = 0.3;
-		private var _died : Boolean;
+		private var _movementDuration : int = 0.4;
+		private var _died : Boolean = false;
 
 		public static function get Instance() : FroggerController
 		{
@@ -48,9 +47,8 @@ package de.crowdpark.froggler.mvcs.controller
 
 		override protected function onAddedToStage(event : Event) : void
 		{
-			_died = false;
 			IEventDispatcher(event.currentTarget).removeEventListener(event.type, arguments['callee']);
-			stage.addEventListener(KeyboardEvent.KEY_DOWN, onKeyDownHandler);
+			_died = false;
 		}
 
 		public function die() : void
@@ -58,7 +56,7 @@ package de.crowdpark.froggler.mvcs.controller
 			_froggerMC.gotoAndPlay(_deadAnimationKeyName);
 			_died = true;
 			dispatchEvent(new FroggerControllerEvent(FroggerControllerEvent.DIE));
-			wait(40, onWaitComplete);
+			wait(40, onGameOutComplete);
 		}
 
 		private function onWaitComplete() : void
@@ -66,9 +64,10 @@ package de.crowdpark.froggler.mvcs.controller
 			new FinishGameCommand().addEventListener(FinishGameCommandEvent.GAME_OUT_COMPLETE, onGameOutComplete);
 		}
 
-		private function onGameOutComplete(event : FinishGameCommandEvent) : void
+		private function onGameOutComplete(event : FinishGameCommandEvent = null) : void
 		{
-			IEventDispatcher(event.currentTarget).removeEventListener(event.type, arguments['callee']);
+			if (event) IEventDispatcher(event.currentTarget).removeEventListener(event.type, arguments['callee']);
+
 			init();
 		}
 
@@ -94,6 +93,8 @@ package de.crowdpark.froggler.mvcs.controller
 
 		override public function init() : void
 		{
+			if (stage.hasEventListener(KeyboardEvent.KEY_DOWN)) stage.removeEventListener(KeyboardEvent.KEY_DOWN, onKeyDownHandler);
+
 			this.x = 0;
 			this.y = 0;
 			_froggerMC = null;
@@ -109,15 +110,17 @@ package de.crowdpark.froggler.mvcs.controller
 
 			_froggerMC = (this.getChildByName("frog") as MovieClip);
 			_froggerMC.gotoAndPlay(_idleAnimationKeyName);
+
+			stage.addEventListener(KeyboardEvent.KEY_DOWN, onKeyDownHandler);
 		}
 
 		private function onKeyDownHandler(event : KeyboardEvent) : void
 		{
-			IEventDispatcher(event.currentTarget).removeEventListener(event.type, arguments['callee']);
+			var keyCode : uint = event.keyCode;
 
 			if (_died) return;
 
-			var keyCode : uint = event.keyCode;
+			IEventDispatcher(event.currentTarget).removeEventListener(event.type, arguments['callee']);
 
 			switch(keyCode)
 			{
