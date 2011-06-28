@@ -14,7 +14,7 @@ package de.crowdpark.froggler.mvcs
 		private static var _Instance : ApplicationContext;
 		private var _gameModel : GameModel;
 		private var _scoreModel : ScoreModel;
-		
+
 		public static function get Instance() : ApplicationContext
 		{
 			if (!_Instance)
@@ -37,24 +37,22 @@ package de.crowdpark.froggler.mvcs
 
 		public function init() : void
 		{
-			
 			if (!root)
 			{
 				throw new Error("root is null");
 			}
-			
+
 			this.invokeBootStrap();
 		}
 
 		private function invokeBootStrap() : void
 		{
-			
 			this._gameModel = new GameModel();
 			this._scoreModel = new ScoreModel();
-			
+
 			SharedObjectService.Instance.init();
+
 			new GameInvokerCommand();
-			
 		}
 
 		public function get scoreModel() : ScoreModel
