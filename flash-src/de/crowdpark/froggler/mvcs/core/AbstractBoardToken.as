@@ -1,10 +1,11 @@
 package de.crowdpark.froggler.mvcs.core
 {
 	import de.crowdpark.froggler.mvcs.controller.CollisionDetectionBitMap;
-	import de.crowdpark.froggler.mvcs.controller.FroggerControllerEvent;
 	import de.crowdpark.froggler.mvcs.controller.FroggerController;
+	import de.crowdpark.froggler.mvcs.controller.FroggerControllerEvent;
 
 	import com.greensock.TweenMax;
+	import com.greensock.easing.Linear;
 
 	import flash.display.MovieClip;
 	import flash.events.Event;
@@ -33,7 +34,7 @@ package de.crowdpark.froggler.mvcs.core
 		{
 			_targetMovementMC = targetMovementMC;
 		}
-
+		
 		public function init() : void
 		{
 			if (!_targetMovementMC) throw new Error("Target MC is NULL!!!");
@@ -41,7 +42,7 @@ package de.crowdpark.froggler.mvcs.core
 			this.addEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
 			this.x = this._xStartPoint;
 			this.alpha = 0;
-			
+
 			_targetMovementMC.addChild(this);
 
 			_frog = FroggerController.Instance;
@@ -100,7 +101,7 @@ package de.crowdpark.froggler.mvcs.core
 
 		protected function move() : void
 		{
-			_moveTween = TweenMax.to(this, _moveDuration, {x:_xEndpoint, onComplete:dispose});
+			_moveTween = TweenMax.to(this, _moveDuration, {x:_xEndpoint, ease:Linear.easeNone, onComplete:dispose});
 			CollisionDetectionBitMap.Instance.addHitItem(this);
 		}
 
