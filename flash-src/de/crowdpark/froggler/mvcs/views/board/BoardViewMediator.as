@@ -6,7 +6,6 @@ package de.crowdpark.froggler.mvcs.views.board
 	import de.crowdpark.froggler.mvcs.controller.StreetEnemyController;
 	import de.crowdpark.froggler.mvcs.controller.WaterEnemysController;
 	import de.crowdpark.froggler.mvcs.core.AbstractMediator;
-	import de.crowdpark.froggler.mvcs.views.hud.GameHudView;
 	import de.crowdpark.froggler.mvcs.views.hud.GameHudViewEvent;
 
 	import com.greensock.TweenMax;
@@ -39,14 +38,10 @@ package de.crowdpark.froggler.mvcs.views.board
 		override protected function registerEvents() : void
 		{
 			view.addEventListener(BoardViewEvent.START_GAME, onStartGame);
-			FroggerController.Instance.addEventListener(FroggerControllerEvent.DIE, onFrogDie);
+			FroggerController.Instance.addEventListener(FroggerControllerEvent.SHOW_DIE_SPLASH, onShowSplashScreen);
 		}
 
-		private function onNoLife(event : GameHudViewEvent) : void
-		{
-		}
-
-		private function onFrogDie(event : FroggerControllerEvent) : void
+		private function onShowSplashScreen(event : FroggerControllerEvent) : void
 		{
 			_dieContainer = new game_over_container();
 			_dieContainer.alpha = 0;
@@ -65,7 +60,7 @@ package de.crowdpark.froggler.mvcs.views.board
 		private function dieTweenReverseComplete() : void
 		{
 			view.removeChild(_dieContainer);
-			dispatchEvent(new BoardViewEvent(BoardViewEvent.START_GAME));
+			view.dispatchEvent(new BoardViewEvent(BoardViewEvent.START_GAME));
 		}
 
 		private function onStartClicked(event : MouseEvent) : void

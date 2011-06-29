@@ -13,7 +13,7 @@ package de.crowdpark.froggler.components
 		
 		override public function get isAccessible() : Boolean
 		{
-			return false;
+			return true;
 		}
 	}
 }

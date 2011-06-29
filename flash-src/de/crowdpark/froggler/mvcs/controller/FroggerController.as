@@ -1,5 +1,12 @@
 package de.crowdpark.froggler.mvcs.controller
 {
+	import de.crowdpark.froggler.mvcs.views.board.BoardView;
+
+	import utils.geom.getRectangleCenter;
+	import utils.display.getFullBounds;
+
+	import flash.geom.Point;
+
 	import utils.display.wait;
 
 	import de.crowdpark.froggler.mvcs.commands.FinishGameCommand;
@@ -32,17 +39,45 @@ package de.crowdpark.froggler.mvcs.controller
 		private var _movementRotationDuration : int = 0.2;
 		private var _movementDuration : int = 0.4;
 		private var _died : Boolean = false;
+		private var _waitDurationAfterShowSplashDieScreen : uint = 30;
+		private var _topLeftPoint : Point;
+		private var _xCord : int;
+		private var _yCord : int;
+		private var _centerPoint : Point;
+
+		public function FroggerController()
+		{
+			_centerPoint = new Point(this.x, this.y);
+			_topLeftPoint = new Point(this.width / 2, this.height / 2);
+			_xCord = _topLeftPoint.x;
+			_yCord = _topLeftPoint.y;
+		}
+
+		public function get xCord() : int
+		{
+			return _xCord;
+		}
+
+		public function get yCord() : int
+		{
+			return _yCord;
+		}
+
+		public function get topLeftPoint() : Point
+		{
+			return _topLeftPoint;
+		}
+
+		public function  get centerPoint() : Point
+		{
+			return _centerPoint;
+		}
 
 		public static function get Instance() : FroggerController
 		{
 			if (!_Instance) _Instance = new  FroggerController();
 
 			return _Instance;
-		}
-
-		public function FroggerController()
-		{
-			this.addEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
 		}
 
 		override protected function onAddedToStage(event : Event) : void
@@ -56,7 +91,7 @@ package de.crowdpark.froggler.mvcs.controller
 			_froggerMC.gotoAndPlay(_deadAnimationKeyName);
 			_died = true;
 			dispatchEvent(new FroggerControllerEvent(FroggerControllerEvent.DIE));
-			wait(40, onGameOutComplete);
+			wait(_waitDurationAfterShowSplashDieScreen, onGameOutComplete);
 		}
 
 		private function onWaitComplete() : void
@@ -67,12 +102,13 @@ package de.crowdpark.froggler.mvcs.controller
 		private function onGameOutComplete(event : FinishGameCommandEvent = null) : void
 		{
 			if (event) IEventDispatcher(event.currentTarget).removeEventListener(event.type, arguments['callee']);
-
+			dispatchEvent(new FroggerControllerEvent(FroggerControllerEvent.SHOW_DIE_SPLASH));
 			init();
 		}
 
 		public function win() : void
 		{
+			trace("Frog Win");
 			_froggerMC.gotoAndPlay(_dissappearAnimationKeyName);
 		}
 
@@ -98,15 +134,16 @@ package de.crowdpark.froggler.mvcs.controller
 			this.x = 0;
 			this.y = 0;
 			_froggerMC = null;
-			_moveVerticalFactor = 32;
-			_moveHorizontalFactor = 32;
+			_moveVerticalFactor = 64;
+			_moveHorizontalFactor = 64;
 			_died = false;
+			_defaultX = 0;
+			_defaultY = 0;
 
 			_defaultX = this.x += this.width / 2;
-			_moveHorizontalFactor += _defaultX;
 
-			_defaultY = this.y += this.height / 2;
-			_moveVerticalFactor += _defaultY;
+			this.y = _boardMC.height - (80 + this.height / 2);
+			_defaultY += this.height / 2;
 
 			_froggerMC = (this.getChildByName("frog") as MovieClip);
 			_froggerMC.gotoAndPlay(_idleAnimationKeyName);
@@ -185,8 +222,17 @@ package de.crowdpark.froggler.mvcs.controller
 		{
 			var newX : int = this.x + _froggerMC.width + parseInt(factor);
 
-			if (newX > 810) return;
-			if (newX < 90) return;
+			if (newX >= 810)
+			{
+				moveComplete();
+				return;
+			}
+
+			if (newX <= 90)
+			{
+				moveComplete();
+				return;
+			}
 
 			TweenMax.to(this, _movementDuration, {x:factor, onComplete:moveComplete});
 		}
@@ -195,8 +241,17 @@ package de.crowdpark.froggler.mvcs.controller
 		{
 			var newY : int = this.y + _froggerMC.height + parseInt(factor);
 
-			if (newY > 800) return;
-			if (newY < 35) return;
+			if (newY >= 800)
+			{
+				moveComplete();
+				return;
+			}
+
+			if (newY <= 30)
+			{
+				moveComplete();
+				return;
+			}
 
 			TweenMax.to(this, _movementDuration, {y:factor, onComplete:moveComplete});
 		}
