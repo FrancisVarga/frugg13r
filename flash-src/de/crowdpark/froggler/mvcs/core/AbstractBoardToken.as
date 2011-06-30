@@ -24,6 +24,7 @@ package de.crowdpark.froggler.mvcs.core
 		private var _moveTween : TweenMax;
 		private var _alphaTween : TweenMax;
 		private var _frog : FroggerController;
+		protected var _isAccessible : Boolean = false;
 
 		public function AbstractBoardToken()
 		{
@@ -34,7 +35,7 @@ package de.crowdpark.froggler.mvcs.core
 		{
 			_targetMovementMC = targetMovementMC;
 		}
-		
+
 		public function init() : void
 		{
 			if (!_targetMovementMC) throw new Error("Target MC is NULL!!!");
@@ -85,7 +86,7 @@ package de.crowdpark.froggler.mvcs.core
 
 		public function get isAccessible() : Boolean
 		{
-			return false;
+			return this._isAccessible;
 		}
 
 		public function get following() : Boolean

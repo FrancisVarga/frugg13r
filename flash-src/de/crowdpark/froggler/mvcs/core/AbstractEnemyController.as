@@ -1,10 +1,10 @@
 package de.crowdpark.froggler.mvcs.core
 {
-	import de.crowdpark.froggler.mvcs.views.board.BoardView;
-	import de.crowdpark.froggler.mvcs.controller.FroggerControllerEvent;
-	import de.crowdpark.froggler.mvcs.controller.FroggerController;
-
 	import utils.number.randomIntegerWithinRange;
+
+	import de.crowdpark.froggler.mvcs.controller.FroggerController;
+	import de.crowdpark.froggler.mvcs.controller.FroggerControllerEvent;
+	import de.crowdpark.froggler.mvcs.views.board.BoardView;
 
 	import flash.display.MovieClip;
 	import flash.events.EventDispatcher;
@@ -32,14 +32,15 @@ package de.crowdpark.froggler.mvcs.core
 		protected function beginMovingItems(event : TimerEvent = null) : void
 		{
 			var street : MovieClip = this.getRandomTargetItem();
+
 			var item : AbstractBoardToken = new _listOfItems[randomIntegerWithinRange(0, _listOfItems.length - 1)];
 
-			// item.targetMovementMC = street;
-			item.targetMovementMC 	= BoardView.Instance;
-			item.xStartPoint 		= item.width + street.width + _xStartPointAddOn;
-			item.xEndpoint 			= -(item.width + _xEndPointAddOn);
-			item.y 					= street.y;
-			item.moveDuration 		= _moveDuration;
+			item.targetMovementMC = BoardView.Instance;
+			item.xStartPoint = item.width + street.width + _xStartPointAddOn;
+			item.xEndpoint = -(item.width + _xEndPointAddOn);
+			item.y = street.y;
+			item.moveDuration = _moveDuration;
+
 			item.init();
 		}
 
@@ -49,14 +50,17 @@ package de.crowdpark.froggler.mvcs.core
 			initAddItemTimer();
 			beginMovingItems();
 
-			FroggerController.Instance.addEventListener(FroggerControllerEvent.DIE, onFrogDie);
+			FroggerController.Instance.addEventListener(FroggerControllerEvent.DIE, onFrogGetGoal);
+			FroggerController.Instance.addEventListener(FroggerControllerEvent.WIN, onFrogGetGoal);
 		}
 
-		private function onFrogDie(event : FroggerControllerEvent) : void
+		private function onFrogGetGoal(event : FroggerControllerEvent) : void
 		{
 			_addingItemTimer.removeEventListener(TimerEvent.TIMER, beginMovingItems);
 			_addingItemTimer.reset();
 			_addingItemTimer.stop();
+
+			_listOfItems.splice(0, _listOfItems.length - 1);
 		}
 
 		protected function initAddItemTimer() : void

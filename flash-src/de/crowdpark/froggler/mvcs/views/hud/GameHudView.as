@@ -1,10 +1,10 @@
 package de.crowdpark.froggler.mvcs.views.hud
 {
-	import flash.events.Event;
-
 	import com.greensock.TweenMax;
+	import com.greensock.easing.Linear;
 
 	import flash.display.MovieClip;
+	import flash.events.Event;
 
 	/**
 	 * @author Francis Varga
@@ -47,7 +47,6 @@ package de.crowdpark.froggler.mvcs.views.hud
 
 			_timeBar = (getChildByName("timeBar") as MovieClip);
 			_timeBarWidth = _timeBar.width;
-			startTimeBar();
 
 			super.onAddedToStage(event);
 		}
@@ -63,7 +62,7 @@ package de.crowdpark.froggler.mvcs.views.hud
 			_timeBarTween.kill();
 			_timeBar.width = _timeBarWidth;
 
-			if (_lifeArray.length == 0)
+			if (_lifeArray.length <= 0)
 			{
 				dispatchEvent(new GameHudViewEvent(GameHudViewEvent.NO_LIFE));
 				return;
@@ -77,7 +76,7 @@ package de.crowdpark.froggler.mvcs.views.hud
 
 		public function startTimeBar() : void
 		{
-			_timeBarTween = TweenMax.to(_timeBar, _timeLimit, {width:0, onComplete:onTimeBarTweenComplete});
+			_timeBarTween = TweenMax.to(_timeBar, _timeLimit, {width:0, ease:Linear.easeNone, onComplete:onTimeBarTweenComplete});
 		}
 	}
 }

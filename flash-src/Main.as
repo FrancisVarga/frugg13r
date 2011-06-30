@@ -1,5 +1,8 @@
 ﻿package
 {
+	import flash.events.ProgressEvent;
+	import flash.events.IOErrorEvent;
+
 	import de.crowdpark.froggler.mvcs.ApplicationContext;
 
 	import flash.display.MovieClip;
@@ -16,7 +19,18 @@
 			stage.scaleMode = StageScaleMode.NO_SCALE;
 			stage.align = StageAlign.TOP_LEFT;
 
+			this.loaderInfo.addEventListener(IOErrorEvent.IO_ERROR, onIOError);
+			this.loaderInfo.addEventListener(ProgressEvent.PROGRESS, onProgress);
+
 			this.addEventListener(Event.ADDED_TO_STAGE, onRootAddedToStage);
+		}
+
+		private function onProgress(event : ProgressEvent) : void
+		{
+		}
+
+		private function onIOError(event : IOErrorEvent) : void
+		{
 		}
 
 		private function onRootAddedToStage(event : Event) : void

@@ -8,7 +8,7 @@ package de.crowdpark.froggler.mvcs.commands
 	 */
 	public class StartGameCommand extends AbstractCommand
 	{
-		override public function executeCommand(data : Object = null) : void
+		override public function executeCommand() : void
 		{
 			BoardView.Instance.startGame();
 			this.context.root.gotoAndPlay("gameIn");

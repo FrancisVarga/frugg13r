@@ -10,7 +10,7 @@ package de.crowdpark.froggler.mvcs.commands
 	 */
 	public class GameInvokerCommand extends AbstractCommand
 	{
-		override public function executeCommand(data : Object = null) : void
+		override public function executeCommand() : void
 		{
 			var background : game_background_container = prepareBackground();
 			this.context.root.addChild(background);

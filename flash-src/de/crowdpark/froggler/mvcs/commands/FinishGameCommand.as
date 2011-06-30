@@ -19,7 +19,7 @@ package de.crowdpark.froggler.mvcs.commands
 			return _Instance;
 		}
 
-		override public function executeCommand(data : Object = null) : void
+		override public function executeCommand() : void
 		{
 			context.root.gotoAndPlay("gameOut");
 			wait(40, onWaitComplete);

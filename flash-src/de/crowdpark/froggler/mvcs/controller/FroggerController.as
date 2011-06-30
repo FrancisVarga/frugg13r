@@ -1,12 +1,5 @@
 package de.crowdpark.froggler.mvcs.controller
 {
-	import de.crowdpark.froggler.mvcs.views.board.BoardView;
-
-	import utils.geom.getRectangleCenter;
-	import utils.display.getFullBounds;
-
-	import flash.geom.Point;
-
 	import utils.display.wait;
 
 	import de.crowdpark.froggler.mvcs.commands.FinishGameCommand;
@@ -19,6 +12,7 @@ package de.crowdpark.froggler.mvcs.controller
 	import flash.events.IEventDispatcher;
 	import flash.events.KeyboardEvent;
 	import flash.events.MouseEvent;
+	import flash.geom.Point;
 
 	/**
 	 * @author Francis Varga
@@ -44,6 +38,7 @@ package de.crowdpark.froggler.mvcs.controller
 		private var _xCord : int;
 		private var _yCord : int;
 		private var _centerPoint : Point;
+		public var isFloaTing : Boolean;
 
 		public function FroggerController()
 		{
@@ -108,7 +103,6 @@ package de.crowdpark.froggler.mvcs.controller
 
 		public function win() : void
 		{
-			trace("Frog Win");
 			_froggerMC.gotoAndPlay(_dissappearAnimationKeyName);
 		}
 
@@ -147,8 +141,6 @@ package de.crowdpark.froggler.mvcs.controller
 
 			_froggerMC = (this.getChildByName("frog") as MovieClip);
 			_froggerMC.gotoAndPlay(_idleAnimationKeyName);
-
-			stage.addEventListener(KeyboardEvent.KEY_DOWN, onKeyDownHandler);
 		}
 
 		private function onKeyDownHandler(event : KeyboardEvent) : void
@@ -224,17 +216,17 @@ package de.crowdpark.froggler.mvcs.controller
 
 			if (newX >= 810)
 			{
-				moveComplete();
+				addKeyboardListener();
 				return;
 			}
 
 			if (newX <= 90)
 			{
-				moveComplete();
+				addKeyboardListener();
 				return;
 			}
 
-			TweenMax.to(this, _movementDuration, {x:factor, onComplete:moveComplete});
+			TweenMax.to(this, _movementDuration, {x:factor, onComplete:addKeyboardListener});
 		}
 
 		private function moveVertical(factor : String) : void
@@ -243,20 +235,20 @@ package de.crowdpark.froggler.mvcs.controller
 
 			if (newY >= 800)
 			{
-				moveComplete();
+				addKeyboardListener();
 				return;
 			}
 
 			if (newY <= 30)
 			{
-				moveComplete();
+				addKeyboardListener();
 				return;
 			}
 
-			TweenMax.to(this, _movementDuration, {y:factor, onComplete:moveComplete});
+			TweenMax.to(this, _movementDuration, {y:factor, onComplete:addKeyboardListener});
 		}
 
-		private function moveComplete() : void
+		public function addKeyboardListener() : void
 		{
 			stage.addEventListener(KeyboardEvent.KEY_DOWN, onKeyDownHandler);
 		}

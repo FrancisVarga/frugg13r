@@ -10,22 +10,32 @@ package de.crowdpark.froggler.mvcs.core
 	public class AbstractCommand extends EventDispatcher
 	{
 		private var _context : ApplicationContext;
+		private var _data : Object;
 
 		public function AbstractCommand(autoExecute : Boolean = true, data : Object = null)
 		{
 			this._context = ApplicationContext.Instance;
-			
-			if(autoExecute) executeCommand(data);
-			
+
+			if (autoExecute) executeCommand();
 		}
 
-		public function executeCommand(data : Object = null) : void
+		public function executeCommand() : void
 		{
 		}
 
 		protected function get context() : ApplicationContext
 		{
 			return _context;
+		}
+
+		public function get data() : Object
+		{
+			return _data;
+		}
+
+		public function set data(data : Object) : void
+		{
+			_data = data;
 		}
 	}
 }
