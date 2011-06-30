@@ -1,6 +1,3 @@
 [submodule "libs/as3Utils"]
 	path = libs/as3Utils
 	url = git://github.com/as3/as3-utils.git
-[submodule "libs/gskinnerLib"]
-	path = libs/gskinnerLib
-	url = git://github.com/gskinner/AS3Libs.git
