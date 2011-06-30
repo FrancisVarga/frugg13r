@@ -2,7 +2,6 @@ package de.crowdpark.froggler.mvcs.controller
 {
 	import utils.display.wait;
 
-	import de.crowdpark.froggler.mvcs.commands.FinishGameCommand;
 	import de.crowdpark.froggler.mvcs.commands.FinishGameCommandEvent;
 
 	import com.greensock.TweenMax;
@@ -87,11 +86,6 @@ package de.crowdpark.froggler.mvcs.controller
 			_died = true;
 			dispatchEvent(new FroggerControllerEvent(FroggerControllerEvent.DIE));
 			wait(_waitDurationAfterShowSplashDieScreen, onGameOutComplete);
-		}
-
-		private function onWaitComplete() : void
-		{
-			new FinishGameCommand().addEventListener(FinishGameCommandEvent.GAME_OUT_COMPLETE, onGameOutComplete);
 		}
 
 		private function onGameOutComplete(event : FinishGameCommandEvent = null) : void

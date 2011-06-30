@@ -10,15 +10,6 @@ package de.crowdpark.froggler.mvcs.commands
 	 */
 	public class FinishGameCommand extends AbstractCommand
 	{
-		private static var _Instance : FinishGameCommand;
-
-		public static function get Instance() : FinishGameCommand
-		{
-			if (!_Instance) _Instance = new  FinishGameCommand();
-
-			return _Instance;
-		}
-
 		override public function executeCommand() : void
 		{
 			context.root.gotoAndPlay("gameOut");

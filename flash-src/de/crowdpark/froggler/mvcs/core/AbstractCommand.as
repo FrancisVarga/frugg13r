@@ -15,7 +15,8 @@ package de.crowdpark.froggler.mvcs.core
 		public function AbstractCommand(autoExecute : Boolean = true, data : Object = null)
 		{
 			this._context = ApplicationContext.Instance;
-
+			this._data = data;
+			
 			if (autoExecute) executeCommand();
 		}
 
