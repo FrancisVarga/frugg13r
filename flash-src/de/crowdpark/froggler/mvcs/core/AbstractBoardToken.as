@@ -25,6 +25,7 @@ package de.crowdpark.froggler.mvcs.core
 		private var _alphaTween : TweenMax;
 		private var _frog : FroggerController;
 		protected var _isAccessible : Boolean = false;
+		private var _direction : uint;
 
 		public function AbstractBoardToken()
 		{
@@ -39,6 +40,11 @@ package de.crowdpark.froggler.mvcs.core
 		public function init() : void
 		{
 			if (!_targetMovementMC) throw new Error("Target MC is NULL!!!");
+
+			if (direction === 0)
+			{
+				this.rotation = 180;
+			}
 
 			this.addEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
 			this.x = this._xStartPoint;
@@ -129,6 +135,16 @@ package de.crowdpark.froggler.mvcs.core
 		protected function moveInALine() : void
 		{
 			return;
+		}
+
+		public function set direction(direction : uint) : void
+		{
+			_direction = direction;
+		}
+
+		public function get direction() : uint
+		{
+			return _direction;
 		}
 	}
 }

@@ -20,7 +20,7 @@ package de.crowdpark.froggler.mvcs.core
 		protected var _timerDurationToAddItem : uint = 1000;
 		protected var _addingItemTimer : Timer;
 		protected var _listOfItems : Array;
-		private var _xEndPointAddOn : uint = 300;
+		private var _xEndPointAddOn : uint = 30;
 		private var _xStartPointAddOn : uint = 30;
 		private var _moveDuration : uint = 16;
 
@@ -31,14 +31,33 @@ package de.crowdpark.froggler.mvcs.core
 
 		protected function beginMovingItems(event : TimerEvent = null) : void
 		{
-			var street : MovieClip = this.getRandomTargetItem();
+			var targetItem : AbstractWay = (this.getRandomTargetItem() as AbstractWay);
 
 			var item : AbstractBoardToken = new _listOfItems[randomIntegerWithinRange(0, _listOfItems.length - 1)];
 
 			item.targetMovementMC = BoardView.Instance;
-			item.xStartPoint = item.width + street.width + _xStartPointAddOn;
-			item.xEndpoint = -(item.width + _xEndPointAddOn);
-			item.y = street.y;
+			item.direction = targetItem.direction;
+			item.xStartPoint = item.width + targetItem.width + _xStartPointAddOn;
+
+			var xEndpoint : int = 0;
+
+			/**
+			 * targeItem.direction 	0 = von links nach rechts
+			 * 						1 = von rechts nach links
+			 */
+			if (targetItem.direction === 0)
+			{
+				xEndpoint = item.width + _xEndPointAddOn;
+				item.xStartPoint = item.width + targetItem.width + _xStartPointAddOn;
+			}
+			else
+			{
+				xEndpoint = item.width + _xEndPointAddOn;
+				item.xStartPoint = -(item.width + targetItem.width + _xStartPointAddOn);
+			}
+
+			item.xEndpoint = xEndpoint;
+			item.y = targetItem.y;
 			item.moveDuration = _moveDuration;
 
 			item.init();

@@ -1,11 +1,20 @@
 package de.crowdpark.froggler.mvcs.views.board
 {
+	import utils.array.getRandomElement;
+
+	import de.crowdpark.froggler.components.LongCar;
+	import de.crowdpark.froggler.components.MediumCar;
+	import de.crowdpark.froggler.components.MediumTree;
+	import de.crowdpark.froggler.components.SmallCarBlue;
+	import de.crowdpark.froggler.components.SmallTree;
+	import de.crowdpark.froggler.components.Street;
+	import de.crowdpark.froggler.components.Turtle;
+	import de.crowdpark.froggler.components.Water;
 	import de.crowdpark.froggler.mvcs.controller.CollisionDetectionBitMap;
 	import de.crowdpark.froggler.mvcs.controller.FroggerController;
 	import de.crowdpark.froggler.mvcs.controller.FroggerControllerEvent;
-	import de.crowdpark.froggler.mvcs.controller.StreetEnemyController;
-	import de.crowdpark.froggler.mvcs.controller.WaterEnemysController;
 	import de.crowdpark.froggler.mvcs.core.AbstractMediator;
+	import de.crowdpark.froggler.mvcs.core.AbstractWay;
 	import de.crowdpark.froggler.mvcs.views.hud.GameHudView;
 
 	import com.greensock.TweenMax;
@@ -28,14 +37,20 @@ package de.crowdpark.froggler.mvcs.views.board
 		private var _startCounterScreen : MovieClip;
 		private var _startCounterTextField : TextField;
 		private var _startCounterArray : Array;
-		private var _waitDuration : uint = 10;
+		private var _waitDuration : uint = 4;
+		private var _streetArray : Array;
+		private var _maxStreet : uint = 4;
+		private var _waterArray : Array;
+		private var _maxWater : uint = 5;
 
 		override public function init(view : MovieClip) : void
 		{
-			_boardView = (view as BoardView);
-			setTargetLists();
+			_waterArray = new Array();
+			_streetArray = new Array();
 
 			super.init(view);
+			_boardView = (view as BoardView);
+			setTargetLists();
 		}
 
 		override protected function registerEvents() : void
@@ -47,6 +62,11 @@ package de.crowdpark.froggler.mvcs.views.board
 
 		private function onShowStartSplash(event : Event) : void
 		{
+			CollisionDetectionBitMap.Instance.init();
+
+			getWaterMCs();
+			getStreetMCs();
+
 			onStartGame();
 
 			view.addChild(GameHudView.Instance);
@@ -54,7 +74,7 @@ package de.crowdpark.froggler.mvcs.views.board
 			_startCounterScreen = new game_start_splash_screen();
 			_startCounterScreen.alpha = 0;
 			_startCounterScreen.addEventListener(Event.ADDED_TO_STAGE, onStartCounterScreenOnStage);
-			view.addChild(_startCounterScreen);
+			view.stage.addChild(_startCounterScreen);
 		}
 
 		private function onStartCounterScreenOnStage(event : Event) : void
@@ -79,9 +99,10 @@ package de.crowdpark.froggler.mvcs.views.board
 
 		private function onTweenCounterComplete() : void
 		{
-			view.removeChild(_startCounterScreen);
+			view.stage.removeChild(_startCounterScreen);
 			GameHudView.Instance.startTimeBar();
 			FroggerController.Instance.addKeyboardListener();
+			CollisionDetectionBitMap.Instance.init();
 		}
 
 		private function onShowDieContainer(event : FroggerControllerEvent) : void
@@ -113,16 +134,62 @@ package de.crowdpark.froggler.mvcs.views.board
 
 		private function setTargetLists() : void
 		{
-			WaterEnemysController.Instance.targetList = _boardView.waterArray;
-			StreetEnemyController.Instance.targetList = _boardView.streetArray;
+			// WaterEnemysController.Instance.targetList = this._waterArray;
+			// StreetEnemyController.Instance.targetList = this._streetArray;
 			FroggerController.Instance.boardMC = _boardView;
 		}
 
 		private function onStartGame(event : BoardViewEvent = null) : void
 		{
-			WaterEnemysController.Instance.init();
-			StreetEnemyController.Instance.init();
-			CollisionDetectionBitMap.Instance.init();
+			// WaterEnemysController.Instance.init();
+			// StreetEnemyController.Instance.init();
+			// CollisionDetectionBitMap.Instance.init();
+		}
+
+		private function getWaterMCs() : void
+		{
+			var waterItems : Array = [Turtle, MediumTree, SmallTree, SmallTree];
+
+			for (var i : int = 1; i < _maxWater; i++)
+			{
+				var water : Water = (view.getChildByName("water" + i) as Water);
+				water.direction = i % 2;
+				water.itemClass = getRandomElement(waterItems);
+				_waterArray.push(configureWay(water));
+			}
+
+			CollisionDetectionBitMap.Instance.waterRawItems = _waterArray;
+		}
+
+		private function getStreetMCs() : void
+		{
+			var streetItems : Array = [LongCar, MediumCar, SmallCarBlue, SmallCarBlue, SmallCarBlue, SmallCarBlue];
+
+			for (var i : int = 1; i < _maxStreet; i++)
+			{
+				var street : Street = (view.getChildByName("street" + i) as Street);
+				street.direction = i % 2;
+				street.itemClass = getRandomElement(streetItems);
+				_streetArray.push(configureWay(street));
+			}
+		}
+
+		private function configureWay(item : AbstractWay) : AbstractWay
+		{
+			var speedArray : Array = [18, 20, 18, 19, 20, 19, 22];
+			item.speed = getRandomElement(speedArray);
+			item.init();
+			return item;
+		}
+
+		public function get waterList() : Array
+		{
+			return _waterArray;
+		}
+
+		public function get streetList() : Array
+		{
+			return _streetArray;
 		}
 	}
 }
