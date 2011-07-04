@@ -1,5 +1,4 @@
-package de.crowdpark.froggler.mvcs.core
-{
+package de.crowdpark.froggler.mvcs.core {
 	import utils.number.randomIntegerWithinRange;
 
 	import de.crowdpark.froggler.mvcs.controller.FroggerController;

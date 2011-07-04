@@ -1,5 +1,4 @@
-package de.crowdpark.froggler.mvcs
-{
+package de.crowdpark.froggler.mvcs {
 	import de.crowdpark.froggler.mvcs.commands.GameInvokerCommand;
 	import de.crowdpark.froggler.mvcs.models.GameModel;
 	import de.crowdpark.froggler.mvcs.models.ScoreModel;

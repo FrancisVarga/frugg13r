@@ -1,5 +1,4 @@
-package de.crowdpark.froggler.mvcs.controller
-{
+package de.crowdpark.froggler.mvcs.controller {
 	import utils.display.wait;
 
 	import de.crowdpark.froggler.mvcs.commands.FinishGameCommandEvent;

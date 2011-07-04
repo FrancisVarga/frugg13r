@@ -1,5 +1,4 @@
-package de.crowdpark.froggler.mvcs.views.scores
-{
+package de.crowdpark.froggler.mvcs.views.scores {
 	import de.crowdpark.froggler.mvcs.core.AbstractMediator;
 
 	import com.greensock.TweenMax;

@@ -1,10 +1,9 @@
-package de.crowdpark.froggler.mvcs.views.scores
-{
+package de.crowdpark.froggler.mvcs.views.scores {
 	import com.greensock.TweenMax;
 
-	import flash.events.MouseEvent;
 	import flash.display.MovieClip;
 	import flash.events.Event;
+	import flash.events.MouseEvent;
 
 	/**
 	 * @author Francis Varga

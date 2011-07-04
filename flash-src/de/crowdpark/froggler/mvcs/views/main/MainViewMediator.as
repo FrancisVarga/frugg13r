@@ -1,5 +1,4 @@
-package de.crowdpark.froggler.mvcs.views.main
-{
+package de.crowdpark.froggler.mvcs.views.main {
 	import de.crowdpark.froggler.mvcs.core.AbstractMediator;
 
 	import flash.events.IEventDispatcher;

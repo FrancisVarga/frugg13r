@@ -1,5 +1,4 @@
-package de.crowdpark.froggler.mvcs.core
-{
+package de.crowdpark.froggler.mvcs.core {
 	import de.crowdpark.froggler.mvcs.controller.CollisionDetectionBitMap;
 	import de.crowdpark.froggler.mvcs.controller.FroggerController;
 	import de.crowdpark.froggler.mvcs.controller.FroggerControllerEvent;

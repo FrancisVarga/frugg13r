@@ -1,5 +1,4 @@
-package de.crowdpark.froggler.mvcs.views.hud
-{
+package de.crowdpark.froggler.mvcs.views.hud {
 	import flash.events.Event;
 
 	/**

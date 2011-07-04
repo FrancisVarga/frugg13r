@@ -1,5 +1,4 @@
-package de.crowdpark.froggler.mvcs.commands
-{
+package de.crowdpark.froggler.mvcs.commands {
 	import flash.events.Event;
 
 	/**

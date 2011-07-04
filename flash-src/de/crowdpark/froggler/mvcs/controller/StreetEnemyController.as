@@ -1,5 +1,4 @@
-package de.crowdpark.froggler.mvcs.controller
-{
+package de.crowdpark.froggler.mvcs.controller {
 	import de.crowdpark.froggler.components.LongCar;
 	import de.crowdpark.froggler.components.MediumCar;
 	import de.crowdpark.froggler.components.SmallCarBlue;

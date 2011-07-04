@@ -1,5 +1,4 @@
-package de.crowdpark.froggler.mvcs.commands
-{
+package de.crowdpark.froggler.mvcs.commands {
 	import utils.display.wait;
 
 	import de.crowdpark.froggler.mvcs.core.AbstractCommand;

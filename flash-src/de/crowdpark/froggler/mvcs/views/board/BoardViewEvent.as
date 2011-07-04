@@ -1,5 +1,4 @@
-package de.crowdpark.froggler.mvcs.views.board
-{
+package de.crowdpark.froggler.mvcs.views.board {
 	import flash.events.Event;
 
 	/**

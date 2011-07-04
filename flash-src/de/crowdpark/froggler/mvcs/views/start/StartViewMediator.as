@@ -1,5 +1,4 @@
-package de.crowdpark.froggler.mvcs.views.start
-{
+package de.crowdpark.froggler.mvcs.views.start {
 	import de.crowdpark.froggler.mvcs.commands.StartGameCommand;
 	import de.crowdpark.froggler.mvcs.core.AbstractMediator;
 	import de.crowdpark.froggler.mvcs.core.AbstractViewEvent;

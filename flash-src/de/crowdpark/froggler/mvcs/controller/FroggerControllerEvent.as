@@ -1,5 +1,4 @@
-package de.crowdpark.froggler.mvcs.controller
-{
+package de.crowdpark.froggler.mvcs.controller {
 	import flash.events.Event;
 
 	/**

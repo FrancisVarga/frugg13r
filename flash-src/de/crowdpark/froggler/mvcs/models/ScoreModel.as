@@ -1,5 +1,4 @@
-package de.crowdpark.froggler.mvcs.models
-{
+package de.crowdpark.froggler.mvcs.models {
 	import de.crowdpark.froggler.mvcs.core.AbstractModel;
 
 	/**

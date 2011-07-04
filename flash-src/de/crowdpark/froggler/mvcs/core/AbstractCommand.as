@@ -1,5 +1,4 @@
-package de.crowdpark.froggler.mvcs.core
-{
+package de.crowdpark.froggler.mvcs.core {
 	import de.crowdpark.froggler.mvcs.ApplicationContext;
 
 	import flash.events.EventDispatcher;

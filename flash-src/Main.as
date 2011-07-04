@@ -1,8 +1,4 @@
-﻿package
-{
-	import flash.events.ProgressEvent;
-	import flash.events.IOErrorEvent;
-
+package {
 	import de.crowdpark.froggler.mvcs.ApplicationContext;
 
 	import flash.display.MovieClip;
@@ -10,6 +6,8 @@
 	import flash.display.StageScaleMode;
 	import flash.events.Event;
 	import flash.events.IEventDispatcher;
+	import flash.events.IOErrorEvent;
+	import flash.events.ProgressEvent;
 
 	[SWF(backgroundColor="#FFFFFF", frameRate="36", width="768", height="768")]
 	public class Main extends MovieClip

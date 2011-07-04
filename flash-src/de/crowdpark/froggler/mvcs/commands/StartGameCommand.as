@@ -1,5 +1,4 @@
-package de.crowdpark.froggler.mvcs.commands
-{
+package de.crowdpark.froggler.mvcs.commands {
 	import de.crowdpark.froggler.mvcs.core.AbstractCommand;
 	import de.crowdpark.froggler.mvcs.views.board.BoardView;
 

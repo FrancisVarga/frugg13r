@@ -1,5 +1,4 @@
-package de.crowdpark.froggler.mvcs.views.board
-{
+package de.crowdpark.froggler.mvcs.views.board {
 	import utils.array.getRandomElement;
 
 	import de.crowdpark.froggler.components.LongCar;

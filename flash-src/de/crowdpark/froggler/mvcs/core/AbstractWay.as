@@ -1,9 +1,7 @@
-package de.crowdpark.froggler.mvcs.core
-{
-	import de.crowdpark.froggler.mvcs.controller.CollisionDetectionBitMap;
-
+package de.crowdpark.froggler.mvcs.core {
 	import utils.array.getRandomElement;
-	import utils.number.randomWithinRange;
+
+	import de.crowdpark.froggler.mvcs.controller.CollisionDetectionBitMap;
 
 	import com.greensock.TweenMax;
 	import com.greensock.easing.Linear;
@@ -11,8 +9,6 @@ package de.crowdpark.froggler.mvcs.core
 	import flash.display.MovieClip;
 	import flash.events.Event;
 	import flash.events.IEventDispatcher;
-	import flash.events.TimerEvent;
-	import flash.utils.Timer;
 
 	/**
 	 * @author Francis Varga

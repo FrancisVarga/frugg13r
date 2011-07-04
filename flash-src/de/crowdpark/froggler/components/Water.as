@@ -1,5 +1,4 @@
-package de.crowdpark.froggler.components
-{
+package de.crowdpark.froggler.components {
 	import de.crowdpark.froggler.mvcs.core.AbstractWay;
 
 	/**

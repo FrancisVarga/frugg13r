@@ -1,9 +1,8 @@
-package de.crowdpark.froggler.mvcs.views.main
-{
-	import flash.display.MovieClip;
+package de.crowdpark.froggler.mvcs.views.main {
 	import de.crowdpark.froggler.mvcs.commands.StartGameCommand;
 	import de.crowdpark.froggler.mvcs.core.AbstractView;
 
+	import flash.display.MovieClip;
 	import flash.events.MouseEvent;
 
 	/**

@@ -1,5 +1,4 @@
-package de.crowdpark.froggler.mvcs.controller
-{
+package de.crowdpark.froggler.mvcs.controller {
 	import de.crowdpark.froggler.components.Croc;
 	import de.crowdpark.froggler.components.MediumTree;
 	import de.crowdpark.froggler.components.SmallTree;

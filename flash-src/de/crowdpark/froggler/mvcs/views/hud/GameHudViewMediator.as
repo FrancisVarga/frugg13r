@@ -1,5 +1,4 @@
-package de.crowdpark.froggler.mvcs.views.hud
-{
+package de.crowdpark.froggler.mvcs.views.hud {
 	import de.crowdpark.froggler.mvcs.controller.FroggerController;
 	import de.crowdpark.froggler.mvcs.controller.FroggerControllerEvent;
 	import de.crowdpark.froggler.mvcs.core.AbstractMediator;
