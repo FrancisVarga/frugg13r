@@ -1,4 +1,5 @@
-package de.crowdpark.froggler.mvcs.core {
+package de.crowdpark.froggler.mvcs.core
+{
 	import de.crowdpark.froggler.mvcs.controller.CollisionDetectionBitMap;
 	import de.crowdpark.froggler.mvcs.controller.FroggerController;
 	import de.crowdpark.froggler.mvcs.controller.FroggerControllerEvent;
@@ -20,15 +21,24 @@ package de.crowdpark.froggler.mvcs.core {
 		protected var _xEndpoint : int;
 		protected var _xStartPoint : int;
 		protected var _moveDuration : int;
+		protected var _isAccessible : Boolean = false;
+		
 		private var _moveTween : TweenMax;
 		private var _alphaTween : TweenMax;
 		private var _frog : FroggerController;
-		protected var _isAccessible : Boolean = false;
 		private var _direction : uint;
 
 		public function AbstractBoardToken()
 		{
 			super();
+			this.addEventListener(Event.REMOVED_FROM_STAGE, onRemovedFromStage);
+		}
+
+		private function onRemovedFromStage(event : Event) : void
+		{
+			IEventDispatcher(event.currentTarget).removeEventListener(event.type, arguments['callee']);
+			trace("Removed from Stage");
+			this.dispose();
 		}
 
 		public function set targetMovementMC(targetMovementMC : MovieClip) : void

@@ -36,7 +36,7 @@ package de.crowdpark.froggler.mvcs.controller {
 		private var _xCord : int;
 		private var _yCord : int;
 		private var _centerPoint : Point;
-		public var isFloaTing : Boolean;
+		public var isFloaTing : Boolean = false;
 
 		public function FroggerController()
 		{
