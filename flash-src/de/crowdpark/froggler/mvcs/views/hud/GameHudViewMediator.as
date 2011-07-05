@@ -32,7 +32,7 @@ package de.crowdpark.froggler.mvcs.views.hud {
 			FroggerController.Instance.addEventListener(FroggerControllerEvent.WIN, onWin);
 
 			view.addEventListener(GameHudViewEvent.NO_LIFE, onNoLife);
-			view.addEventListener(GameHudViewEvent.TIME_COMPLETE, onTimeComplete);
+//			view.addEventListener(GameHudViewEvent.TIME_COMPLETE, onTimeComplete);
 		}
 
 		private function onTimeComplete(event : GameHudViewEvent) : void

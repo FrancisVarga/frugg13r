@@ -22,7 +22,6 @@ package de.crowdpark.froggler.mvcs.core
 		protected var _xStartPoint : int;
 		protected var _moveDuration : int;
 		protected var _isAccessible : Boolean = false;
-		
 		private var _moveTween : TweenMax;
 		private var _alphaTween : TweenMax;
 		private var _frog : FroggerController;
@@ -37,8 +36,6 @@ package de.crowdpark.froggler.mvcs.core
 		private function onRemovedFromStage(event : Event) : void
 		{
 			IEventDispatcher(event.currentTarget).removeEventListener(event.type, arguments['callee']);
-			trace("Removed from Stage");
-			this.dispose();
 		}
 
 		public function set targetMovementMC(targetMovementMC : MovieClip) : void
@@ -68,6 +65,7 @@ package de.crowdpark.froggler.mvcs.core
 		private function onFrogDie(event : FroggerControllerEvent) : void
 		{
 			IEventDispatcher(event.currentTarget).removeEventListener(event.type, arguments['callee']);
+			_moveTween.kill();
 			_alphaTween.reverse(true);
 		}
 
@@ -93,9 +91,7 @@ package de.crowdpark.froggler.mvcs.core
 
 		override public function dispose() : void
 		{
-			_moveTween.kill();
 			CollisionDetectionBitMap.Instance.removeHitItem(this);
-
 			_targetMovementMC.removeChild(this);
 		}
 

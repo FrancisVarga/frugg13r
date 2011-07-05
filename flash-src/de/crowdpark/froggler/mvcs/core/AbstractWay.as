@@ -1,4 +1,5 @@
-package de.crowdpark.froggler.mvcs.core {
+package de.crowdpark.froggler.mvcs.core
+{
 	import utils.array.getRandomElement;
 
 	import de.crowdpark.froggler.mvcs.controller.CollisionDetectionBitMap;
@@ -88,9 +89,9 @@ package de.crowdpark.froggler.mvcs.core {
 			for (var i : int = 0; i < _childrenList.length; i++)
 			{
 				CollisionDetectionBitMap.Instance.removeHitItem(_childrenList[i]);
-				_childrenList.splice(0, _childrenList.length - 1);
 			}
 
+			_childrenList.splice(0, _childrenList.length - 1);
 			_targetMC.removeChild(target);
 		}
 
