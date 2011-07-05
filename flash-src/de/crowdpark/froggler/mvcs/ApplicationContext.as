@@ -1,8 +1,6 @@
-package de.crowdpark.froggler.mvcs {
+package de.crowdpark.froggler.mvcs
+{
 	import de.crowdpark.froggler.mvcs.commands.GameInvokerCommand;
-	import de.crowdpark.froggler.mvcs.models.GameModel;
-	import de.crowdpark.froggler.mvcs.models.ScoreModel;
-	import de.crowdpark.froggler.mvcs.services.SharedObjectService;
 
 	/**
 	 * @author Francis Varga
@@ -11,8 +9,6 @@ package de.crowdpark.froggler.mvcs {
 	{
 		private var _root : Main;
 		private static var _Instance : ApplicationContext;
-		private var _gameModel : GameModel;
-		private var _scoreModel : ScoreModel;
 
 		public static function get Instance() : ApplicationContext
 		{
@@ -46,22 +42,7 @@ package de.crowdpark.froggler.mvcs {
 
 		private function invokeBootStrap() : void
 		{
-			this._gameModel = new GameModel();
-			this._scoreModel = new ScoreModel();
-
-			SharedObjectService.Instance.init();
-
 			new GameInvokerCommand();
-		}
-
-		public function get scoreModel() : ScoreModel
-		{
-			return _scoreModel;
-		}
-
-		public function get gameModel() : GameModel
-		{
-			return _gameModel;
 		}
 	}
 }
